@@ -81,4 +81,9 @@ public class AdminController {
 		return "redirect:list-users";
 	}
 	
+	@RequestMapping(value="/change-calendar", method = RequestMethod.GET) 
+	public String changeCalendar () {
+		return "change-calendar";
+	}
+	
 }

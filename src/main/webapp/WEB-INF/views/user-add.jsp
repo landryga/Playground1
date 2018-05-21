@@ -4,7 +4,7 @@
 
 <div class="container">
 
-Add user
+Dodaj użytkownika
 
 <form:form method="POST" commandName = "user">
 	
@@ -13,18 +13,24 @@ Add user
 	
 	
 	<fieldset class="form-group">
-		<form:label path="username">Name</form:label>
+		<form:label path="username">Imię</form:label>
 		<form:input path="username" type = "text" class="form-control" required = "required"/>
 		<form:errors path="username" cssClass="text-warning"/>
 	</fieldset>
 	
-	<font color="red">${message}</font>
+	<fieldset class="form-group">
+		<form:label path="userSurname">Nazwisko</form:label>
+		<form:input path="userSurname" type = "text" class="form-control" required = "required"/>
+		<form:errors path="userSurname" cssClass="text-warning"/>
+	</fieldset>
 	
 	<fieldset class="form-group">
 		<form:label path="email">Email</form:label>
 		<form:input path="email" type = "text" class="form-control" required = "required"/>
 		<form:errors path="email" cssClass="text-warning"/>
 	</fieldset>
+	
+	<font color="red">${message}</font>
 	
 	<fieldset class="form-group">
 		<form:label path="is_admin">Role</form:label>
@@ -52,7 +58,5 @@ Add user
 
 </div>
 
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <%@ include file="common/footer.jspf" %>

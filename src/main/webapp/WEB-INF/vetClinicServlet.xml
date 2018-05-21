@@ -19,7 +19,6 @@
     </bean>
     
     
-	
 	<mvc:resources mapping="/webjars/**" location="/webjars/"/>
 	
 	<bean id="messageSource"
@@ -56,6 +55,7 @@
 	</mvc:interceptors>
 	
     <mvc:annotation-driven />
+    <mvc:default-servlet-handler /> 
 	    
 	    
 	

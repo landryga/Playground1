@@ -3,17 +3,21 @@
 
 <div class = "container">
 	
-<header>Select action:</header></br>
+<header>Wybierz akcję:</header></br>
 	
 <table class="table table-striped">	
 	<tbody>	
 		<tr>
-			<td>Add new user</td>
+			<td>Dodaj nowego użytkownika</td>
 			<td><a href="/add-user" class = "btn btn-info">OK</a></td>
 		</tr>
 		<tr>
-			<td>Update user</td>
+			<td>Zaktualizuj dane użytkownika:</td>
 			<td><a href="/list-users" class = "btn btn-info">OK</a></td>
+		</tr>
+		<tr>
+			<td>Edytuj grafik:</td>
+			<td><a href="/change-calendar" class = "btn btn-info">OK</a></td>
 		</tr>
 		<!--  TODO - TO BE COMPLETED IN THE FUTURE
 		<tr>
@@ -28,8 +32,5 @@
 	
 </div>
 
-
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <%@ include file="common/footer.jspf" %>

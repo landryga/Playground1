@@ -18,7 +18,6 @@ C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClini
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\login\WelcomeController.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\owner\Owner.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\AdminController.java
-C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\mail\MailConfigurer.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\UserAddConstraint.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\patients\Patient.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\security\SecurityConfiguration.java
@@ -41,6 +40,7 @@ C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClini
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\goods\GoodContoller.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\mail\MailHandler.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\finances\FinanceController.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\environmentalHelper\CharsetFilter.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\visits\VisitService.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\consultation\ConsultationController.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\UserMaintainer.java

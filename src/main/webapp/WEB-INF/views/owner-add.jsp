@@ -47,7 +47,5 @@ Add patient's owner or <a class="btn btn-info" href = "/list-owners">Choose exis
 
 </div>
 
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <%@ include file="common/footer.jspf" %>

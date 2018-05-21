@@ -40,6 +40,7 @@ com\vetClinic\visits\VisitController.class
 com\vetClinic\DAO\UsersDAOimpl.class
 com\vetClinic\visits\VisitGood.class
 com\vetClinic\finances\FinanceService.class
+com\vetClinic\environmentalHelper\CharsetFilter.class
 com\vetClinic\owner\OwnerService.class
 com\vetClinic\consultation\ConsultationController.class
 com\vetClinic\mail\MailHandler.class

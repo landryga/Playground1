@@ -38,9 +38,6 @@ Add patient
 		<form:input path="microchip_id" type = "text" value = "234" class="form-control"/>
 		<form:errors path="microchip_id" cssClass="text-warning"/>
 		
-		<form:label path="color">Color</form:label>
-		<form:input path="color" type = "text" value = "black" class="form-control" required = "required"/>
-		<form:errors path="color" cssClass="text-warning"/>
 	
 	</fieldset>
 	
@@ -49,7 +46,5 @@ Add patient
 
 </div>
 
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <%@ include file="common/footer.jspf" %>
