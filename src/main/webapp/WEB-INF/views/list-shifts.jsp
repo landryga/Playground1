@@ -4,7 +4,13 @@
 
 <div class="container">
 
-<form:form method="POST" commandName = "change-calendar">
+
+
+<form:form method="POST" commandName = "list-shifts">
+
+
+<div id='calendar'></div>
+
 
 <script>
 
@@ -16,22 +22,18 @@ $(function() {
 		theme:true,
 		themeSystem:'bootstrap3',
 		
-		header: { left: 'prev, next, today, prevYear, nextYear', center: 'title', right: 'month,agendaWeek,agendaDay' },
+		header: { left: 'prev, next, today, prevYear, nextYear', center: 'title', right: 'month,agendaWeek,agendaDay' }
 		
-		events: [
-			
-			{ title: 'All Day Event', start: new Date(y, m, 1) },
-			{ title: 'rererere', start: new Date(y, m, 22), end: new Date(y, m, 23)  }
-			
-		]
+		${data}
 		
 	})
 
 });
 
+
 </script>
 
-<div id='calendar'></div>
+
 
 <style> body { text-align: center; font-size: 14px; font-family: “Lucida Grande”,Helvetica,Arial,Verdana,sans-serif; } #calendar { width: 1000px; margin: 0 auto; } </style>
 

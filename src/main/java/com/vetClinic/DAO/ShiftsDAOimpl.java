@@ -28,9 +28,16 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 
 	@Override
 	public Shift get(int shift_id) {
+		return null;
+	}
+
+	@Override
+	public List<Shift> list() {
 		List<Shift> shiftsList = new ArrayList<Shift>();
 		
 		String sql = "select d.id, d.uzytkownik_id, d.rozpoczecie, d.zakonczenie, concat(u.imie, concat(' ', u.nazwisko)) as username from dyzur d left join uzytkownik u on d.uzytkownik_id = u.id;";
+		
+		
 		
 		try {
 			
@@ -48,6 +55,8 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 				shift.setEnd_date(shifts_rs.getDate(4));
 				shift.setUsername(shifts_rs.getString(5));
 				
+				shiftsList.add(shift);
+				
 			}
 			
 			
@@ -56,13 +65,7 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 			System.out.println(e.getMessage());
 		}
 		
-		return null;
-	}
-
-	@Override
-	public List<Shift> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return shiftsList;
 	}
 
 	@Override

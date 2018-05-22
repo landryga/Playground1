@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>Edytuj grafik:</td>
-			<td><a href="/change-calendar" class = "btn btn-info">OK</a></td>
+			<td><a href="/list-shifts" class = "btn btn-info">OK</a></td>
 		</tr>
 		<!--  TODO - TO BE COMPLETED IN THE FUTURE
 		<tr>

@@ -2,9 +2,11 @@ com\vetClinic\todo\Todo.class
 com\vetClinic\visits\Visit.class
 com\vetClinic\goods\GoodContoller.class
 com\vetClinic\owner\Owner.class
+com\vetClinic\shifts\Shift.class
 com\vetClinic\DAO\GoodDAOimpl.class
 com\vetClinic\dbhelper\DBconfig.class
 com\vetClinic\DAO\ConsultationDAO.class
+com\vetClinic\shifts\ShiftController.class
 com\vetClinic\finances\FinanceDay.class
 com\vetClinic\login\WelcomeController.class
 com\vetClinic\admin\UserMaintainer.class
@@ -16,6 +18,7 @@ com\vetClinic\finances\FinanceController.class
 com\vetClinic\DAO\PatientsDAO.class
 com\vetClinic\patients\PatientController.class
 com\vetClinic\patients\PatientService.class
+com\vetClinic\DAO\ShiftsDAO.class
 com\vetClinic\DAO\FinanceDAOimpl.class
 com\vetClinic\login\UserException.class
 com\vetClinic\admin\UserValidator.class
@@ -35,11 +38,14 @@ com\vetClinic\exception\ExceptionController.class
 com\vetClinic\goods\GoodService.class
 com\vetClinic\DAO\OwnersDAO.class
 com\vetClinic\admin\Test.class
+com\vetClinic\DAO\ShiftsDAOimpl.class
 com\vetClinic\goods\Good.class
 com\vetClinic\visits\VisitController.class
 com\vetClinic\DAO\UsersDAOimpl.class
+com\vetClinic\shifts\ShiftBuilder.class
 com\vetClinic\visits\VisitGood.class
 com\vetClinic\finances\FinanceService.class
+com\vetClinic\shifts\ShiftService.class
 com\vetClinic\environmentalHelper\CharsetFilter.class
 com\vetClinic\owner\OwnerService.class
 com\vetClinic\consultation\ConsultationController.class
