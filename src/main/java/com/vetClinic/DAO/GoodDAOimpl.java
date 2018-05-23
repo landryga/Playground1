@@ -91,7 +91,7 @@ public class GoodDAOimpl implements GoodDAO {
 	public List<Good> list() {
 		List<Good> goodsList = new ArrayList<Good>();
 		
-		String goodsSql = "select id, nazwa, ilosc, cena from goods;";
+		String goodsSql = "select id, nazwa, ilosc, cena from produkt;";
 				
 		try {
 			Connection connection = dS.getConnection();

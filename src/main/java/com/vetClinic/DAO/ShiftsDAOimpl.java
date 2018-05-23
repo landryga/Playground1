@@ -86,4 +86,22 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 		
 	}
 
+	@Override
+	public void deleteShift(int id) {
+		String sql = "delete from dyzur where id = " + id + ";";
+		
+		Connection connection;
+		try {
+			connection = dS.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 }

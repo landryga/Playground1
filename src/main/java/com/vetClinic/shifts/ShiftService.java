@@ -30,6 +30,12 @@ public class ShiftService {
 		return shifts;
 	}
 	
+	public void deleteShift(int shiftId) {
+		ShiftsDAOimpl shiftsdao = new ShiftsDAOimpl();
+		
+		shiftsdao.deleteShift(shiftId);
+	}
+	
 	
 	
 	

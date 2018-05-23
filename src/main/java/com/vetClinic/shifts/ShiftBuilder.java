@@ -17,13 +17,12 @@ public class ShiftBuilder {
 			Shift shift = shifts.get(i);
 			
 			shiftString+= " { ";
+			shiftString+= " id : '" + shift.getShiftId() + "',";
 			shiftString+= " title : '" + shift.getUsername() + "',";
 			shiftString+= " start : '" + sdf.format(shift.getStart_date()) + "'";
 			if(shift.getEnd_date()!=null) {
 				shiftString+= ", end : '" + sdf.format(shift.getEnd_date()) + "'";
 			}
-			
-			
 			shiftString+=" } ";
 			
 			if(i<shifts.size()-1)
@@ -32,7 +31,10 @@ public class ShiftBuilder {
 			}
 		}
 		
-		shiftString+=" ] ";
+		shiftString+=" ]"
+				+ ", eventRender: function(event, element) {\r\n" + 
+				"   element.html(event.title + '<span class=\"removeEvent glyphicon glyphicon-trash pull-right\" id='+event.id+'  onclick=\"myFunction('+event.id+')\"\"></span>');\r\n" + 
+				"} ";
 		
 		System.out.println(shiftString);
 		

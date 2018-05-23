@@ -15,6 +15,8 @@ public interface ShiftsDAO {
 
 	public int addShift(Shift shift);
 	
+	public void deleteShift(int id);
+	
 	void updateShift(Shift shift);
 
 }

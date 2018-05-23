@@ -46,7 +46,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 	public List<Patient> list() {
 		List<Patient> patientsList = new ArrayList<Patient>();
 		
-		String patientsSql = "select p.id, p.rasa, p.gatunek, p.plec, p.imie, p.id_klienta, p.data_urodzenia, p.data_zgonu, p.microchip_id, concat(o.name, ' ' , o.surname) as owner_name from pacjent p left join klient o on p.id_klienta=o.id;";
+		String patientsSql = "select p.id, p.rasa, p.gatunek, p.plec, p.imie, p.id_klienta, p.data_urodzenia, p.data_zgonu, p.microchip_id, concat(o.imie, ' ' , o.nazwisko) as owner_name from pacjent p left join klient o on p.id_klienta=o.id;";
 		
 		try {
 			Connection connection = dS.getConnection();
@@ -66,7 +66,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 				patient.setMicrochip_id(rs.getInt(9));
 				Date dateHelper = new Date();
 				dateHelper = rs.getDate(8);
-				if(!dateHelper.equals(null)) {
+				if(dateHelper!=null) {
 					patient.setAlive(true);
 				}
 				else patient.setAlive(false);

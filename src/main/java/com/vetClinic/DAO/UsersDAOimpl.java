@@ -214,7 +214,7 @@ public class UsersDAOimpl implements UsersDAO {
 	public List<UserMaintainer> listDoctors() {
 		List<UserMaintainer> usersList = new ArrayList<UserMaintainer>();
 		
-		String usersSql = "select u.id, u.imie, u.nazwisko, u.email from uzytkownik u inner join uzytrkownik_rola ur on u.id = ur.uzytkownik_id where ur.rola_id = 3;";
+		String usersSql = "select u.id, u.imie, u.nazwisko, u.email from uzytkownik u inner join uzytkownik_rola ur on u.id = ur.uzytkownik_id where ur.rola_id = 3;";
 		
 		try {
 			Connection connection = dS.getConnection();
