@@ -1,6 +1,7 @@
 package com.vetClinic.shifts;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +11,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.vetClinic.admin.AdminService;
+import com.vetClinic.admin.UserMaintainer;
 import com.vetClinic.goods.Good;
 
 @Controller
@@ -31,16 +36,30 @@ public class ShiftController {
 	@Autowired
 	ShiftService service;
 	
+	@Autowired
+	private MessageSource messageSource;
+	
 	@InitBinder     
 	public void initBinder(WebDataBinder binder){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));   
 	}
 	
-	@RequestMapping(value="/shift-add", method = RequestMethod.POST) 
-	public String addGood(ModelMap model, @Valid Shift shift, BindingResult result) {
+	@RequestMapping(value="/list-shifts", method = RequestMethod.POST) 
+	public String addShift(ModelMap model, @Valid Shift shift, BindingResult result) {
+		
+		String message =  "";
 		
 		if(result.hasErrors()) {
+			for (Object object : result.getAllErrors()) {
+				if(object instanceof FieldError) {
+			        FieldError fieldError = (FieldError) object;
+
+			        message = messageSource.getMessage(fieldError, null);
+			    }
+			}
+			model.addAttribute("message", message);
+			model.addAttribute("shift", shift);
 			return "list-shifts";
 		}
 		
@@ -62,6 +81,20 @@ public class ShiftController {
 		if(listo!=null) {
 			events = bld.getString(listo);
 		}
+		
+		AdminService usr = new AdminService();
+		
+		List<UserMaintainer> users = usr.retrieveUsers();
+		
+		List<String> userNames = new ArrayList<>();
+		
+		for (int i = 0; i< users.size(); i++) {
+			userNames.add(users.get(i).getEmail());
+		}
+		
+		model.addAttribute("users", users);
+		
+		model.addAttribute("userNames", userNames);
 		
 		model.addAttribute("data",  events);
 		

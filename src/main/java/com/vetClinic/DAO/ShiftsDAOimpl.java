@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.mysql.jdbc.Statement;
 import com.vetClinic.dbhelper.DBconfig;
+import com.vetClinic.environmentalHelper.DateConverter;
 import com.vetClinic.shifts.Shift;
 
 public class ShiftsDAOimpl implements ShiftsDAO {
@@ -49,10 +52,14 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 			while(shifts_rs.next()) {
 				Shift shift = new Shift();
 				
-				shift.setShiftId(shifts_rs.getInt(1));
+				String start_date = DateConverter.convertFormat(shifts_rs.getString(3), "MM/dd/yyyy hh:mm a");
+				String end_date = DateConverter.convertFormat(shifts_rs.getString(4), "MM/dd/yyyy hh:mm a");
+				
+				
+				shift.setId(shifts_rs.getInt(1));
 				shift.setUser_id(shifts_rs.getInt(2));
-				shift.setStart_date(shifts_rs.getDate(3));
-				shift.setEnd_date(shifts_rs.getDate(4));
+				shift.setStart_date(start_date);
+				shift.setEnd_date(end_date);
 				shift.setUsername(shifts_rs.getString(5));
 				
 				shiftsList.add(shift);
@@ -76,7 +83,28 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 
 	@Override
 	public int addShift(Shift shift) {
-		// TODO Auto-generated method stub
+		
+		String finalStartDate = DateConverter.convertFormat(shift.getStart_date(), "MM/dd/yyyy hh:mm a");
+		String finalEndDate = DateConverter.convertFormat(shift.getEnd_date(), "MM/dd/yyyy hh:mm a");
+		
+
+		String sql = "insert into dyzur(uzytkownik_id, rozpoczecie, zakonczenie) values(" + shift.getUser_id() + ", str_to_date('" + finalStartDate + "','%M/%d/%y %h:%m'), str_to_date( '" + finalEndDate + "', '%M/%d/%y %h:%m'));";
+		
+		System.out.println(sql);
+		
+		Connection connection;
+		try {
+			connection = dS.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		return 0;
 	}
 

@@ -3,6 +3,8 @@ package com.vetClinic.shifts;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.vetClinic.environmentalHelper.DateConverter;
+
 public class ShiftBuilder {
 	
 	public String getString(List<Shift> shifts) {
@@ -17,11 +19,11 @@ public class ShiftBuilder {
 			Shift shift = shifts.get(i);
 			
 			shiftString+= " { ";
-			shiftString+= " id : '" + shift.getShiftId() + "',";
+			shiftString+= " id : '" + shift.getId() + "',";
 			shiftString+= " title : '" + shift.getUsername() + "',";
-			shiftString+= " start : '" + sdf.format(shift.getStart_date()) + "'";
+			shiftString+= " start : '" + DateConverter.convertEventFormat(shift.getStart_date(), "MM/dd/yyyy hh:mm a") + "'";
 			if(shift.getEnd_date()!=null) {
-				shiftString+= ", end : '" + sdf.format(shift.getEnd_date()) + "'";
+				shiftString+= ", end : '" + DateConverter.convertEventFormat(shift.getEnd_date(), "MM/dd/yyyy hh:mm a") + "'";
 			}
 			shiftString+=" } ";
 			

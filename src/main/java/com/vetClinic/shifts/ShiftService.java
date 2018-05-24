@@ -15,6 +15,11 @@ public class ShiftService {
 	
 
 	public int addShift(Shift shift) {
+		
+		ShiftsDAOimpl shiftDAO = new ShiftsDAOimpl();
+		
+		shiftDAO.addShift(shift);
+		
 		return 0;
 	}
 	

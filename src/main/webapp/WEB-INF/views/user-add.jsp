@@ -10,8 +10,6 @@ Dodaj użytkownika
 	
 	<form:hidden path="id"/>
 	
-	
-	
 	<fieldset class="form-group">
 		<form:label path="username">Imię</form:label>
 		<form:input path="username" type = "text" class="form-control" required = "required"/>

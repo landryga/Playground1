@@ -27,6 +27,7 @@ com\vetClinic\DAO\GoodDAO.class
 com\vetClinic\patients\Patient.class
 com\vetClinic\consultation\ConsultationService.class
 com\vetClinic\owner\OwnerController.class
+com\vetClinic\environmentalHelper\DateConverter.class
 com\vetClinic\DAO\ConsultationDAOimpl.class
 com\vetClinic\DAO\FinanceDAO.class
 com\vetClinic\admin\UserAddConstraint.class

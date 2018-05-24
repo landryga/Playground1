@@ -354,7 +354,7 @@ public class VisitController {
 	private String retrieveLoggedinUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
-		
+		System.out.println("username is " + username);
 		return username;
 	}
 	

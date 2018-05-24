@@ -114,7 +114,9 @@ public class UsersDAOimpl implements UsersDAO {
 			while (userSql_rs.next()) {
 				usr.setId(userSql_rs.getInt(1));
 				usr.setUsername(userSql_rs.getString(2));
-				usr.setEmail(userSql_rs.getString(3));
+				usr.setUserSurname(userSql_rs.getString(3));
+				usr.setEmail(userSql_rs.getString(4));
+				usr.setDoctor_id(doctorId_rs.getInt(1));
 			}
 			
 			usr.setIs_admin(true);
@@ -144,7 +146,7 @@ public class UsersDAOimpl implements UsersDAO {
 		
 		String userSql = "select id, imie, nazwisko, email from uzytkownik where email = '" + email + "';";
 		String userRoleSql = "select * from uzytkownik_rola r left join uzytkownik u on r.uzytkownik_id = u.id where u.email = '" + email + "' and r.rola_id = 1	;";
-		String getDoctorId = "select id from uzytkownik u left join uzytkownik_rola ur on u.id = ur.uzytkownik_id where ur.rola_id = 3 and u.email '" + email + "';";
+		String getDoctorId = "select u.id from uzytkownik u left join uzytkownik_rola ur on u.id = ur.uzytkownik_id where ur.rola_id = 3 and u.email = '" + email + "';";
 		
 		UserMaintainer usr = new UserMaintainer();
 		
@@ -162,6 +164,11 @@ public class UsersDAOimpl implements UsersDAO {
 				usr.setUsername(userSql_rs.getString(2));
 				usr.setUserSurname(userSql_rs.getString(3));
 				usr.setEmail(userSql_rs.getString(4));
+				
+			}
+			
+			if(getDoctorId_rs.next()) {
+				usr.setDoctor_id(getDoctorId_rs.getInt(1));
 			}
 			
 			usr.setIs_admin(true);
@@ -188,7 +195,7 @@ public class UsersDAOimpl implements UsersDAO {
 	public List<UserMaintainer> list() {
 		List<UserMaintainer> usersList = new ArrayList<UserMaintainer>();
 		
-		String usersSql = "select id, imie, nazwisko, email from uzytkownik;";
+		String usersSql = "select u.id, u.imie, u.nazwisko, u.email, ur.rola_id from uzytkownik u left join uzytkownik_rola ur on u.id = ur.uzytkownik_id;";
 		
 		try {
 			Connection connection = dS.getConnection();
@@ -201,6 +208,10 @@ public class UsersDAOimpl implements UsersDAO {
 				user.setUsername(rs.getString(2));
 				user.setUserSurname(rs.getString(3));
 				user.setEmail(rs.getString(4));
+				if(rs.getInt(5)==3) {
+					user.setDoctor_id(rs.getInt(1));
+				}
+				
 				usersList.add(user);
 			}
 		} catch (SQLException e) {
@@ -245,20 +256,22 @@ public class UsersDAOimpl implements UsersDAO {
 		String updateSql = "update uzytkownik set imie = '" + username + "', nazwisko = '" + userSurname + "', email = '" + user_email + "' where id = " + user_id + ";";
 		
 		//TODO check that
-		//String insertDoctorInfo = "insert into doctor(user_id) values("+user_id+");";
-		//String deleteDoctorInfo = "delete from doctor where user_id ="+user_id+");";
+		String insertDoctorInfo = "insert into doctor(user_id) values("+user_id+");";
+		String deleteDoctorInfo = "delete from uzytkownik_rola where user_id ="+user_id+" and rola_id = 3;";
 		
 		try {
 			Connection connection = dS.getConnection();
 			PreparedStatement statement = connection.prepareStatement(updateSql);
 			PreparedStatement insertDoctor_statement = connection.prepareStatement(updateSql);
-			PreparedStatement deleteDoctor_statement = connection.prepareStatement(updateSql);
+			PreparedStatement deleteDoctor_statement = connection.prepareStatement(deleteDoctorInfo);
 			
-			statement.execute();
+			statement.executeUpdate();
+			
+			deleteDoctor_statement.executeUpdate();
 			
 			//TODO something weird happens here. It should first of all delete all records with doctor role for this user and then decide if add something
-			if(!maintainer.isIs_doctor()) {
-				jdbcTemplate.execute("insert into doctor(user_id) values("+user_id+");");
+			if(maintainer.isIs_doctor()) {
+				jdbcTemplate.execute("insert into uzytkownik_rola values("+user_id+", 3);");
 			}
 			
 		} catch (SQLException e) {

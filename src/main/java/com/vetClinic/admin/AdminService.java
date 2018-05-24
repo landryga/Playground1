@@ -47,9 +47,6 @@ public class AdminService {
 		
 		JavaMailSenderImpl impl = conf.setMailSender();
 		
-		
-		
-		
 		*/
 		MailHandler handler = new MailHandler();
 		

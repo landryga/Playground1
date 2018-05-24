@@ -8,27 +8,28 @@
 
 <h2>Edycja grafika</h2>
 
-<form:form method="POST" commandName = "shift" id="form1">
+<form:form method="POST" commandName = "shift">
 <br>
 <div class="row">
 <fieldset class="form-group col-xs-3">
 		<form:label path="username">Pracownik: </form:label>
-		<form:select path="username" type = "text" class="form-control" required = "required"/>
-			<c:forEach items="${combo}" var="id">
-    		<option value="${id}">${id}</option>
-			</c:forEach>
+		<form:select path="username" type = "text" class="form-control" required = "required">
+			<form:options items="${userNames}" />
+		</form:select>
 		<form:errors path="username" cssClass="text-warning"/>
 	</fieldset>
 	
+		<font color="red">${message}</font>
+	
 	<fieldset class="form-group col-xs-3">
 		<form:label path="start_date">Poczatek dyzuru: </form:label>
-		<form:input path="start_date" type = "text" class="form-control" required = "required"/>
+		<form:input path="start_date" type = "text" class="form-control" id = 'datetimepicker1' required = "required"/>
 		<form:errors path="start_date" cssClass="text-warning"/>
 	</fieldset>
 	
 	<fieldset class="form-group col-xs-3">
 		<form:label path="end_date">Koniec dyzuru: </form:label>
-		<form:input path="end_date" type = "text" class="form-control" required = "required"/>
+		<form:input path="end_date" type = "text" class="form-control" id = 'datetimepicker2' required = "required"/>
 		<form:errors path="end_date" cssClass="text-warning"/>
 	</fieldset>
 	
@@ -67,7 +68,11 @@ $(function() {
 });
 
 $(function () {
-    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker1').datetimepicker().data('DateTimePicker').date();
+});
+
+$(function () {
+    $('#datetimepicker2').datetimepicker().data('DateTimePicker').date();
 });
 
 
