@@ -9,6 +9,7 @@ public class Shift {
 	private String start_date;
 	private String end_date;
 	private int user_id;
+	private String user_email;
 	private String username;
 	
 	String date_format = "MM/dd/yyyy hh:mm a";

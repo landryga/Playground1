@@ -24,24 +24,24 @@ public class OwnerController {
 	@Autowired
 	OwnerService service;
 
-	@RequestMapping(value="/list-owners", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/list-owners", method = RequestMethod.GET) 
 	public String listOwners (ModelMap model) {
 		model.addAttribute("owners", service.retrieveOwners());
-		return "list-owners";
+		return "/webservice/list-owners";
 	}
 	
 	
-	@RequestMapping(value="/owner-add", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/owner-add", method = RequestMethod.GET) 
 	public String showAddUserPage (ModelMap model) {
 		model.addAttribute("owner", new Owner());
-		return "owner-add";
+		return "/webservice/owner-add";
 	}
 	
-	@RequestMapping(value="/owner-add", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/owner-add", method = RequestMethod.POST) 
 	public String addOwner(ModelMap model, @Valid Owner owner, BindingResult result/*, HttpServletRequest request*/) {
 		
 		if(result.hasErrors()) {
-			return "owner-add";
+			return "/webservice/owner-add";
 		}
 		
 		service.addOwner(owner);
@@ -50,17 +50,17 @@ public class OwnerController {
 		
 		model.addAttribute("owner_id", owner_id);
 		
-		return "redirect:/patient-add";
+		return "redirect:/webservice/patient-add";
 	}
 	
 	
-	@RequestMapping(value="/update-owner", method = RequestMethod.GET)
+	@RequestMapping(value="/webservice/update-owner", method = RequestMethod.GET)
 	public String updatePatient( ModelMap model, @RequestParam int id) {
 		/*
 		UserMaintainer user = service.retrieveUser(id);
 		model.addAttribute("user", user);
 		*/
-		return "redirect:list-owners";
+		return "redirect:/webservice/list-owners";
 	}
 	
 	/*

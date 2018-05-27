@@ -32,13 +32,13 @@ public class ConsultationController {
 	@RequestMapping(value="/consultations", method = RequestMethod.GET) 
 	public String showmMainPanel (ModelMap model) {
 		model.addAttribute("consultations",service.retrieveConsultations());
-		return "consultations";
+		return "/webservice/consultations";
 	}
 	
 	@RequestMapping(value="/consultation-add", method = RequestMethod.GET) 
 	public String showAddConsultationPage (ModelMap model) {
 		model.addAttribute("consultation", new Consultation());
-		return "consultation-add";
+		return "/webservice/consultation-add";
 	}
 	
 	@RequestMapping(value="/consultation-add", method = RequestMethod.POST) 

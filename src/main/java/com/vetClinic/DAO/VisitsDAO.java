@@ -17,10 +17,12 @@ public interface VisitsDAO {
 
 	public int addVisit(Visit visit);
 	
-	void scheduleVisit(Visit visit);
+	public boolean scheduleVisit(Visit visit);
 	
-	void updateVisit(Visit visit);
+	void closeVisit(Visit visit);
 	
 	void updateGoodsUsage(Visit visit);
+
+	public List<Visit> listAllVisits();
 	
 }

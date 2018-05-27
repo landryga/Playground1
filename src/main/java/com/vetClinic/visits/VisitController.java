@@ -47,11 +47,11 @@ public class VisitController {
 	
 	@InitBinder     
 	public void initBinder(WebDataBinder binder){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH");
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));   
 	}
 
-	@RequestMapping(value="/list-visits", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/list-visits", method = RequestMethod.GET) 
 	public String listVisits (ModelMap model, @RequestParam int patient_id) {
 		
 		visitgoods.clear();
@@ -79,10 +79,10 @@ public class VisitController {
 		model.addAttribute("doctor_id", usr.getDoctor_id());
 		
 		model.addAttribute("visits", service.retrieveVisits(patient_id));
-		return "list-visits";
+		return "/webservice/list-visits";
 	}
 	
-	@RequestMapping(value="/list-user-visits", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/list-user-visits", method = RequestMethod.GET) 
 	public String listUserVisits (ModelMap model) {
 		
 		visitgoods.clear();
@@ -94,13 +94,11 @@ public class VisitController {
 		
 		model.addAttribute("doctor_id", usr.getDoctor_id());
 		model.addAttribute("visits", service.retrieveVisits(usr.getUsername()));
-		return "list-visits";
+		return "/webservice/list-visits";
 	}
 	
-	@RequestMapping(value="/visit-add", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/visit-add", method = RequestMethod.GET) 
 	public String showAddVisitPage (ModelMap model, @RequestParam int patient_id, @RequestParam int doctor_id, @RequestParam int visitId) {
-		
-		
 		
 		model.clear();
 		
@@ -121,7 +119,7 @@ public class VisitController {
 			System.out.println("bleble" + good.getName());
 		}
 		
-			model.addAttribute("good_name", goodnames);
+		model.addAttribute("good_name", goodnames);
 		
 		String name = "";
 		
@@ -137,9 +135,6 @@ public class VisitController {
 		
 		model.addAttribute("visitgoods", visitgoods);
 		
-		
-		
-		
 		VisitGood visitgood = new VisitGood();
 		
 		visit.setDoctor_id(doctor_id);
@@ -151,9 +146,9 @@ public class VisitController {
 			visitId = final_visit_id;
 		}
 		
-		visit.setVisitId(visitId);
+		visit.setVisitId(final_visit_id);
 		
-		model.addAttribute("visitId", visitId);
+		model.addAttribute("final_visit_id", final_visit_id);
 		model.addAttribute("doctor_id", doctor_id);
 		
 		System.out.println("visit id is" + visit.getVisitId());
@@ -169,16 +164,16 @@ public class VisitController {
 			
 			System.out.println("final visit id3 is" + visit.getVisitId());
 			
-			return "visit-add";
+			return "/webservice/visit-add";
 		}
 		
 		model.addAttribute("errormessage", "Only doctor can add a visit!");
 		
-		return "list-visits";
+		return "/webservice/list-visits";
 		
 	}
 	
-	@RequestMapping(value="/visit-add", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/visit-add", method = RequestMethod.POST) 
 	public String addVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		
@@ -187,7 +182,7 @@ public class VisitController {
 		visit_reference = service.retrieveLastVisit();
 		
 		if(result.hasErrors()) {
-			return "visit-add";
+			return "/webservice/visit-add";
 		}
 		
 		String comparator = null;
@@ -213,27 +208,32 @@ public class VisitController {
 			
 			visitgoods.add(vg);
 			
-			
-			return "redirect:visit-add?visitId=" + visit_reference.getVisitId() + "&doctor_id=" + visit.getDoctor_id() + "&patient_id=" + visit.getPatient_id();
+			return "redirect:visit-add?visitId=" + visit_reference.getVisitId() +  "&doctor_id=" + visit.getDoctor_id() + "&patient_id=" + visit.getPatient_id() + "&visit_id=" + visit_reference.getVisitId();
 		}
 		
-		visit.setActive(false);
-
-		service.updateVisit(visit_reference);
-		
-		for(VisitGood visitgood : visitgoods) {
+		else {
+			visit.setActive(false);
 			
-			service.addGood(visitgood);
+			visit_reference.setVisit_description(visit.getVisit_description());
+			
+			visit.setVisitId(visit_reference.getVisitId());
+			
+			
+			service.closeVisit(visit, visitgoods);
+			
+			if(!visitgoods.isEmpty()) {
+				service.addGoods(visitgoods);
+			}
+			visitgoods.clear();
+			
+			visit_description = null;
+			
+			return "redirect:list-visits?patient_id=" + visit.getPatient_id();
 		}
 		
-		visitgoods.clear();
-		
-		visit_description = null;
-		
-		return "redirect:list-visits?patient_id=" + visit.getPatient_id();
 	}
 	
-	@RequestMapping(value="/visit-update", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/visit-update", method = RequestMethod.GET) 
 	public String showUpdateVisitPage (ModelMap model, @RequestParam int visitId, @RequestParam int doctor_id) {
 		
 		model.addAttribute("visitId", visitId);
@@ -241,27 +241,27 @@ public class VisitController {
 		if(doctor_id!=0) {
 			model.addAttribute("visit", new Visit());
 			
-			return "visit-update";
+			return "/webservice/visit-update";
 		}
 		
 		
 		model.addAttribute("doctor_id", doctor_id);
 		model.addAttribute("errormessage", "Only doctor can add a visit!");
 		
-		return "list-visits";
+		return "/webservice/list-visits";
 		
 	}
 	
-	@RequestMapping(value="/visit-update", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/visit-update", method = RequestMethod.POST) 
 	public String updateVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "visit-schedule";
+			return "/webservice/visit-schedule";
 		}
 		
 		visit.setActive(false);
 
-		service.updateVisit(visit);
+		//service.updateVisit(visit);
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
 		
@@ -270,7 +270,7 @@ public class VisitController {
 		return "redirect:list-visits?patient_id=" + visit.getPatient_id();
 	}
 	
-	@RequestMapping(value="/visit-view", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/visit-view", method = RequestMethod.GET) 
 	public String showViewVisitPage (ModelMap model, @RequestParam int visitId, @RequestParam int doctor_id) {
 		
 		model.addAttribute("visitId", visitId);
@@ -283,16 +283,16 @@ public class VisitController {
 		
 		if(doctor_id!=0) {
 			model.addAttribute("visit",visit);
-			return "visit-view";
+			return "/webservice/visit-view";
 		}
 		
 		model.addAttribute("doctor_id", doctor_id);
 		model.addAttribute("errormessage", "Only doctor can view a visit!");
 		
-		return "list-visits";
+		return "/webservice/list-visits";
 	}
 	
-	@RequestMapping(value="/visit-view", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/visit-view", method = RequestMethod.POST) 
 	public String viewVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
@@ -301,46 +301,34 @@ public class VisitController {
 		
 		model.addAttribute("visit_description", visit.getVisit_description());
 		
-		return "redirect:list-visits?patient_id=" +  visit.getPatient_id();
+		return "redirect:/webservice/list-visits?patient_id=" +  visit.getPatient_id();
 		
 	}
 	
-	@RequestMapping(value="/visit-schedule", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/visit-schedule", method = RequestMethod.GET) 
 	public String showScheduleVisitPage (ModelMap model, @RequestParam int patient_id) {
 		
 		model.addAttribute("visit", new Visit());
 		
 		AdminService admin = new AdminService();
 		
-		List<UserMaintainer> doctor_list = admin.retrieveDoctors();
+		List<UserMaintainer> users = admin.retrieveDoctors();
 		
-		List<String> names_list = new ArrayList<String>();
-		
-		for(UserMaintainer userMaintainer : doctor_list) {
-			names_list.add(userMaintainer.getUsername().toString());
-		}
-		
-		model.addAttribute("doctor_name", names_list);
+		model.addAttribute("users", users);
 		
 		model.addAttribute("patient_id", patient_id);
 		
-		return "visit-schedule";
+		return "/webservice/visit-schedule";
 	}
 	
-	@RequestMapping(value="/visit-schedule", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/visit-schedule", method = RequestMethod.POST) 
 	public String scheduleVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "visit-schedule";
+			return "/webservice/visit-schedule";
 		}
 		
 		AdminService adminService = new AdminService();
-		
-		String doctor_name = (String)result.getFieldValue("doctor_name");
-		
-		UserMaintainer usr = adminService.retrieveUser(doctor_name);
-		
-		visit.setDoctor_id(usr.getDoctor_id());
 		
 		service.scheduleVisit(visit);
 		
@@ -348,7 +336,7 @@ public class VisitController {
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
 		
-		return "redirect:list-visits";
+		return "list-visits";
 	}
 
 	private String retrieveLoggedinUser() {

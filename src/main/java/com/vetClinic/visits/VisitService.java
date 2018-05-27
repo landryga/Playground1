@@ -9,6 +9,7 @@ import com.vetClinic.DAO.PatientsDAOimpl;
 import com.vetClinic.DAO.UsersDAOimpl;
 import com.vetClinic.DAO.VisitsDAOImpl;
 import com.vetClinic.admin.UserMaintainer;
+import com.vetClinic.goods.Good;
 import com.vetClinic.goods.GoodService;
 import com.vetClinic.patients.Patient;
 
@@ -24,19 +25,42 @@ public class VisitService {
 		return visitdao.addVisit(visit);
 	}
 	
-	public void scheduleVisit(Visit visit) {
+	public boolean scheduleVisit(Visit visit) {
 		VisitsDAOImpl visitdao = new VisitsDAOImpl();
 		
-		visitdao.scheduleVisit(visit);
+		if(!visitdao.scheduleVisit(visit)) {
+			return false;
+		} else
+		{
+			return true;
+		}
+		
 	}
 	
 	
-	public void updateVisit(Visit visit) {
+	public void closeVisit(Visit visit, List<VisitGood> vg) {
 		VisitsDAOImpl visitdao = new VisitsDAOImpl();
 		
-		UserMaintainer dbRef = new UserMaintainer();
 		
-		visitdao.updateVisit(visit);
+		float price_summary = 0;
+		float single_price = 0;
+		
+		GoodService gs = new GoodService();
+		
+		
+		for(VisitGood visitgood : vg) {
+			
+			Good good = gs.retrieveGood(visitgood.getId());
+			
+			single_price = good.getPrice();
+			
+			price_summary+=visitgood.getQty()*single_price;
+		}
+		
+		visit.setPrice(price_summary);
+		
+		
+		visitdao.closeVisit(visit);
 	}
 	
 	public List<Visit> retrieveVisits() {
@@ -44,6 +68,14 @@ public class VisitService {
 		VisitsDAOImpl visitdao = new VisitsDAOImpl();
 		
 		visits = visitdao.list();
+		return visits;
+	}
+	
+	public List<Visit> retrieveVisitsClientView() {
+		
+		VisitsDAOImpl visitdao = new VisitsDAOImpl();
+		
+		visits = visitdao.listAllVisits();
 		return visits;
 	}
 	
@@ -64,11 +96,10 @@ public class VisitService {
 	}
 	
 	public Visit retrieveVisit(int id) {
-		for (Visit visit : visits) {
-			if (visit.getVisitId() == id)
-				return visit;
-		}
-		return null;
+		
+		VisitsDAOImpl visitdao = new VisitsDAOImpl();
+		
+		return visitdao.get(id);
 	}
 	
 	public Visit retrieveLastVisit() {
@@ -81,10 +112,11 @@ public class VisitService {
 		return visit;
 	}
 	
-	public void addGood (VisitGood visitgood) {
+	public void addGoods (List<VisitGood> visitgoodse) {
+		
 		GoodService gservice = new GoodService();
 		
-		gservice.addVisitGood(visitgood);
+		gservice.addVisitGoods(visitgoodse);
 	}
 	
 	public List<VisitGood> retrieveVisitGoods() {

@@ -20,31 +20,31 @@ public class GoodContoller {
 	@Autowired
 	GoodService service;
 	
-	@RequestMapping(value="/goods", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice//goods", method = RequestMethod.GET) 
 	public String showmMainPanel (ModelMap model) {
 		model.addAttribute("goods",service.retrieveGoods());
-		return "goods";
+		return "/webservice/goods";
 	}
 	
-	@RequestMapping(value="/good-add", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/good-add", method = RequestMethod.GET) 
 	public String showAddConsultationPage (ModelMap model) {
 		model.addAttribute("good", new Good());
-		return "good-add";
+		return "/webservice/good-add";
 	}
 	
-	@RequestMapping(value="/good-add", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/good-add", method = RequestMethod.POST) 
 	public String addGood(ModelMap model, @Valid Good good, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "good-add";
+			return "/webservice/good-add";
 		}
 		
 		service.addGood(good);
 		model.clear();
-		return "redirect:goods";
+		return "redirect:/webservice/goods";
 	}
 	
-	@RequestMapping(value="/good-update", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/good-update", method = RequestMethod.GET) 
 	public String showUpdateGoodPage (ModelMap model, @RequestParam int id) {
 
 		Good good = new Good();
@@ -53,14 +53,14 @@ public class GoodContoller {
 
 		model.addAttribute("good", good);
 		
-		return "good-update";
+		return "/webservice/good-update";
 	}
 	
-	@RequestMapping(value="/good-update", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/good-update", method = RequestMethod.POST) 
 	public String updateGood(ModelMap model, @Valid Good good, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "consultation-update";
+			return "/webservice/consultation-update";
 		}
 		
 		service.updateGood(good);
@@ -69,6 +69,6 @@ public class GoodContoller {
 		
 		model.clear();
 		
-		return "redirect:goods";
+		return "/webservice/redirect:goods";
 	}
 }

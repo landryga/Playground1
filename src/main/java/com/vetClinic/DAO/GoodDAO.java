@@ -22,4 +22,6 @@ public interface GoodDAO {
 	public void updateGoodQuantity(Good good);
 
 	public void addVisitGood(VisitGood visitgood);
+	
+	public void addVisitGoods(List<VisitGood> vgs);
 }

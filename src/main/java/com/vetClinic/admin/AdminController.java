@@ -28,24 +28,24 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 
-	@RequestMapping(value="/admin", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/admin", method = RequestMethod.GET) 
 	public String listActions () {
-		return "admin";
+		return "/webservice/admin";
 	}
 	
-	@RequestMapping(value="/list-users", method = RequestMethod.GET)
+	@RequestMapping(value="/webservice/list-users", method = RequestMethod.GET)
 	public String listUsers( ModelMap model) {
 		model.addAttribute("users",service.retrieveUsers());
-		return "list-users";
+		return "/webservice/list-users";
 	}
 	
-	@RequestMapping(value="/add-user", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/add-user", method = RequestMethod.GET) 
 	public String showAddUserPage (ModelMap model) {
 		model.addAttribute("user", new UserMaintainer());
-		return "user-add";
+		return "/webservice/user-add";
 	}
 	
-	@RequestMapping(value="/add-user", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/add-user", method = RequestMethod.POST) 
 	public String addUser(ModelMap model, @Valid UserMaintainer maintainer, BindingResult result) {
 		String message =  "";
 		
@@ -63,27 +63,27 @@ public class AdminController {
 		}
 		service.addUser(maintainer);
 		model.clear();
-		return "redirect:admin";
+		return "redirect:webservice/admin";
 	}
 	
-	@RequestMapping(value="/update-user", method = RequestMethod.GET)
+	@RequestMapping(value="/webservice/update-user", method = RequestMethod.GET)
 	public String updateUser( ModelMap model, @RequestParam int id) {
 		UserMaintainer user = service.retrieveUser(id);
 		model.addAttribute("user", user);
-		return "user-add";
+		return "/webservice/user-add";
 	}
 	
-	@RequestMapping(value="/update-user", method = RequestMethod.POST)
+	@RequestMapping(value="/webservice/update-user", method = RequestMethod.POST)
 	public String updateToDo( ModelMap model, @Valid UserMaintainer user, BindingResult result) {
 		
 		service.updateUser(user);
 		
-		return "redirect:list-users";
+		return "redirect:webservice/list-users";
 	}
 	
-	@RequestMapping(value="/change-calendar", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/change-calendar", method = RequestMethod.GET) 
 	public String changeCalendar () {
-		return "change-calendar";
+		return "/webservice/change-calendar";
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.vetClinic.login;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vetClinic.admin.AdminService;
 import com.vetClinic.admin.UserMaintainer;
+import com.vetClinic.shifts.Shift;
+import com.vetClinic.shifts.ShiftBuilder;
+import com.vetClinic.shifts.ShiftService;
 import com.vetClinic.visits.VisitService;
 
 @Controller 
@@ -32,6 +37,7 @@ public class WelcomeController {
 		
 		return principal.toString();
 	}
+	
 
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
@@ -50,10 +56,30 @@ public class WelcomeController {
 			model.addAttribute("doctor_id", user.getDoctor_id());
 			
 			model.addAttribute("visits", service.retrieveVisits(retrieveLoggedinUser()));
-			return "welcome_doctor";
+			return "/webservice/welcome_doctor";
 		}
 		
-		return "welcome_user";
+		else {
+			ShiftService shfSvc = new ShiftService();
+			
+			String events = null;
+			
+			List<Shift> listo = shfSvc.retrieveShifts();
+			
+			ShiftBuilder bld = new ShiftBuilder();
+			if(listo!=null) {
+				events = bld.getString(listo);
+			}
+			
+			AdminService usr = new AdminService();
+			
+			List<UserMaintainer> users = usr.retrieveUsers();
+			
+			model.addAttribute("data",  events);
+			
+			return "/webservice/welcome_user";
+		}
+		
 	}
 	
 }

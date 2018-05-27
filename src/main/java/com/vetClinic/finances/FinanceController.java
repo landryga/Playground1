@@ -32,11 +32,11 @@ public class FinanceController {
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));   
 	}
 
-	@RequestMapping(value="/finance-report", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/finance-report", method = RequestMethod.GET) 
 	public String listVisits (ModelMap model) {
 		
 		model.addAttribute("finance_days", service.retrieveFinanceDays());
 		
-		return "finance-report";
+		return "/webservice/finance-report";
 	}
 }

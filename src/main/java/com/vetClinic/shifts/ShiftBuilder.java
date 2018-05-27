@@ -3,7 +3,7 @@ package com.vetClinic.shifts;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import com.vetClinic.environmentalHelper.DateConverter;
+import com.vetClinic.environmentalHelper.DateParser;
 
 public class ShiftBuilder {
 	
@@ -21,9 +21,9 @@ public class ShiftBuilder {
 			shiftString+= " { ";
 			shiftString+= " id : '" + shift.getId() + "',";
 			shiftString+= " title : '" + shift.getUsername() + "',";
-			shiftString+= " start : '" + DateConverter.convertEventFormat(shift.getStart_date(), "MM/dd/yyyy hh:mm a") + "'";
+			shiftString+= " start : '" + DateParser.convertEventFormat(shift.getStart_date(), "MM/dd/yyyy hh:mm") + "'";
 			if(shift.getEnd_date()!=null) {
-				shiftString+= ", end : '" + DateConverter.convertEventFormat(shift.getEnd_date(), "MM/dd/yyyy hh:mm a") + "'";
+				shiftString+= ", end : '" + DateParser.convertEventFormat(shift.getEnd_date(), "MM/dd/yyyy hh:mm") + "'";
 			}
 			shiftString+=" } ";
 			

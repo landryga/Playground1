@@ -22,11 +22,20 @@ public class GoodService {
 		gooddao.addGood(good);
 	}
 	
+	
+	
 	public void addVisitGood(VisitGood visitgood) {
 		
 		GoodDAOimpl gooddao = new GoodDAOimpl();
 		
 		gooddao.addVisitGood(visitgood);
+	}
+	
+	public void addVisitGoods(List<VisitGood> vgs) {
+		
+		GoodDAOimpl gooddao = new GoodDAOimpl();
+		
+		gooddao.addVisitGoods(vgs);
 	}
 	
 	public void updateGood(Good good) {

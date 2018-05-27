@@ -46,42 +46,42 @@ public class PatientController {
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));   
 	}
 
-	@RequestMapping(value="/list-patients", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/list-patients", method = RequestMethod.GET) 
 	public String listPatients (ModelMap model) {
 		model.addAttribute("patients", service.retrievePatients());
-		return "list-patients";
+		return "/webservice/list-patients";
 	}
 	
 	
-	@RequestMapping(value="/patient-add", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/patient-add", method = RequestMethod.GET) 
 	public String showAddUserPage (ModelMap model) {
 		model.addAttribute("patient", new Patient());
-		return "patient-add";
+		return "/webservice/patient-add";
 	}
 	
-	@RequestMapping(value="/patient-add", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/patient-add", method = RequestMethod.POST) 
 	public String addPatient(ModelMap model, @Valid Patient patient, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "patient-add";
+			return "/webservice/patient-add";
 		}
 		
 		service.addPatient(patient);
 		
 		model.clear();
 		
-		return "redirect:list-patients";
+		return "redirect:/webservice/list-patients";
 		
 	}
 	
 	
-	@RequestMapping(value="/update-patient", method = RequestMethod.GET)
+	@RequestMapping(value="/webservice/update-patient", method = RequestMethod.GET)
 	public String updatePatient( ModelMap model, @RequestParam int id) {
 		/*
 		UserMaintainer user = service.retrieveUser(id);
 		model.addAttribute("user", user);
 		*/
-		return "redirect:list-patients";
+		return "redirect:/webservice/list-patients";
 	}
 	
 	/*

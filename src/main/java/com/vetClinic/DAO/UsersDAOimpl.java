@@ -36,7 +36,7 @@ public class UsersDAOimpl implements UsersDAO {
 		
 		int user_id;
 		String username = maintainer.getUsername();
-		String userSurname = maintainer.getUserSurname();
+		String userSurname = maintainer.getUserSurName();
 		boolean is_admin = maintainer.getIs_admin();
 		boolean is_doctor = maintainer.isIs_doctor();
 		String user_email = maintainer.getEmail();
@@ -114,7 +114,7 @@ public class UsersDAOimpl implements UsersDAO {
 			while (userSql_rs.next()) {
 				usr.setId(userSql_rs.getInt(1));
 				usr.setUsername(userSql_rs.getString(2));
-				usr.setUserSurname(userSql_rs.getString(3));
+				usr.setUserSurName(userSql_rs.getString(3));
 				usr.setEmail(userSql_rs.getString(4));
 				usr.setDoctor_id(doctorId_rs.getInt(1));
 			}
@@ -162,13 +162,16 @@ public class UsersDAOimpl implements UsersDAO {
 			while (userSql_rs.next()) {
 				usr.setId(userSql_rs.getInt(1));
 				usr.setUsername(userSql_rs.getString(2));
-				usr.setUserSurname(userSql_rs.getString(3));
+				usr.setUserSurName(userSql_rs.getString(3));
 				usr.setEmail(userSql_rs.getString(4));
 				
 			}
 			
+			usr.setIs_doctor(false);
+			
 			if(getDoctorId_rs.next()) {
 				usr.setDoctor_id(getDoctorId_rs.getInt(1));
+				usr.setIs_doctor(true);
 			}
 			
 			usr.setIs_admin(true);
@@ -177,11 +180,6 @@ public class UsersDAOimpl implements UsersDAO {
 				usr.setIs_admin(false);
 			}
 			
-			usr.setIs_doctor(false);
-			
-			if(getDoctorId_rs.next()) {
-				usr.setIs_doctor(true);
-			}
 			
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -206,7 +204,7 @@ public class UsersDAOimpl implements UsersDAO {
 				UserMaintainer user = new UserMaintainer();
 				user.setId(rs.getInt(1));
 				user.setUsername(rs.getString(2));
-				user.setUserSurname(rs.getString(3));
+				user.setUserSurName(rs.getString(3));
 				user.setEmail(rs.getString(4));
 				if(rs.getInt(5)==3) {
 					user.setDoctor_id(rs.getInt(1));
@@ -236,7 +234,7 @@ public class UsersDAOimpl implements UsersDAO {
 				UserMaintainer user = new UserMaintainer();
 				user.setId(rs.getInt(1));
 				user.setUsername(rs.getString(2));
-				user.setUserSurname(rs.getString(3));
+				user.setUserSurName(rs.getString(3));
 				user.setEmail(rs.getString(4));
 				usersList.add(user);
 			}
@@ -251,7 +249,7 @@ public class UsersDAOimpl implements UsersDAO {
 	public void updateUser(UserMaintainer maintainer) {
 		int user_id = maintainer.getId();
 		String username = maintainer.getUsername();
-		String userSurname = maintainer.getUserSurname();
+		String userSurname = maintainer.getUserSurName();
 		String user_email = maintainer.getEmail();
 		String updateSql = "update uzytkownik set imie = '" + username + "', nazwisko = '" + userSurname + "', email = '" + user_email + "' where id = " + user_id + ";";
 		

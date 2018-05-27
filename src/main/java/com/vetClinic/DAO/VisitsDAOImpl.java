@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.mysql.jdbc.Statement;
 import com.vetClinic.admin.UserMaintainer;
 import com.vetClinic.dbhelper.DBconfig;
+import com.vetClinic.environmentalHelper.DateParser;
 import com.vetClinic.visits.Visit;
 
 import org.joda.time.DateTimeComparator;
@@ -35,11 +36,11 @@ public class VisitsDAOImpl implements VisitsDAO{
 	
 	@Override
 	public Visit get(int visit_id) {
-		String visitSql = "select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.name, concat(u.imie, concat(' ',u.nazwisko)) as lekarz, concat(o.imie, concat(' ',o.nazwisko)) as owner_name  from wizyta v" + 
-				"				 left join pacjent p on v.patient_id = p.id" + 
+		String visitSql = "select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as lekarz, concat(o.imie, concat(' ',o.nazwisko)) as owner_name  from wizyta v" + 
+				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				"where v.id = " + visit_id;
+				" where v.id = " + visit_id + ";";
 		Date datereference = new Date();
 		
 		Visit visit = new Visit();
@@ -52,7 +53,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			
 			while (visit_rs.next()) {
 				visit.setVisitId(visit_rs.getInt(1));
-				visit.setVisit_date(visit_rs.getDate(2));
+				visit.setVisit_date(visit_rs.getDate(2).toString());
 				datereference = visit_rs.getDate(2);
 				visit.setDoctor_id(visit_rs.getInt(3));
 				visit.setPatient_id(visit_rs.getInt(4));
@@ -74,7 +75,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 	@Override
 	public Visit getLastVisit() {
 		String maxSql = "select max(id) from wizyta;";
-		int max_id = 0;;
+		int max_id = 0;
 		
 		
 		try {
@@ -110,7 +111,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			
 			while (visit_rs.next()) {
 				visit.setVisitId(visit_rs.getInt(1));
-				visit.setVisit_date(visit_rs.getDate(2));
+				visit.setVisit_date(visit_rs.getDate(2).toString());
 				datereference = visit_rs.getDate(2);
 				visit.setDoctor_id(visit_rs.getInt(3));
 				visit.setPatient_id(visit_rs.getInt(4));
@@ -133,7 +134,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 		List<Visit> visitList = new ArrayList<Visit>();
 		Date date = new Date();
 		
-		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH");
 		
 		String date_string =  df.format(date);
 		
@@ -142,12 +143,12 @@ public class VisitsDAOImpl implements VisitsDAO{
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y') and v.czy_rozpoczeta = 0 order by v.data asc) union all " +
+				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y %H') and v.czy_rozpoczeta = 0 order by v.data asc) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta  from wizyta v" + 
-				"				 left join pacjent p on v.patient_id = p.id" + 
+				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.czy_rozpoczeta = 0 and v.data > str_to_date('" + date_string + "','%m/%d/%Y') order by v.czy_rozpoczeta desc) union all " +
+				" where  v.czy_rozpoczeta = 0 and v.data > str_to_date('" + date_string + "','%m/%d/%Y %H') order by v.czy_rozpoczeta desc) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta  from wizyta v" + 
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
@@ -158,6 +159,8 @@ public class VisitsDAOImpl implements VisitsDAO{
 		
 		Date current_date = new Date();
 		
+		
+		
 		try {
 			Connection connection = dS.getConnection();
 			PreparedStatement statement = connection.prepareStatement(visitsSql);
@@ -167,7 +170,76 @@ public class VisitsDAOImpl implements VisitsDAO{
 			while(visit_rs.next()) {
 				Visit visit = new Visit();
 				visit.setVisitId(visit_rs.getInt(1));
-				visit.setVisit_date(visit_rs.getDate(2));
+				visit.setVisit_date(visit_rs.getDate(2).toString());
+				Date datereference = visit_rs.getDate(2);
+				visit.setDoctor_id(visit_rs.getInt(3));
+				visit.setPatient_id(visit_rs.getInt(4));
+				visit.setVisit_description(visit_rs.getString(5));
+				visit.setPatient_name(visit_rs.getString(6));
+				visit.setDoctor_name(visit_rs.getString(7));
+				visit.setOwner_name(visit_rs.getString(8));
+				
+				int date_comparator = DateTimeComparator.getDateOnlyInstance().compare(current_date, datereference);
+				
+				visit.setToday(false);
+				visit.setPast(true);
+				visit.setActive(false);
+				
+				if(visit_rs.getInt(9) == 0) {
+					visit.setPast(false);
+				}
+				
+				if(date_comparator==0) {
+					visit.setToday(true);
+				}
+				
+				if(visit.isToday()&&!visit.isPast())
+					visit.setActive(true);
+				
+				visitList.add(visit);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return visitList;
+	}
+	
+	@Override
+	public List<Visit> listAllVisits() {
+		List<Visit> visitList = new ArrayList<Visit>();
+		Date date = new Date();
+		
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		
+		String date_string =  df.format(date);
+		
+		//TODO order by czy_ropoczeta???
+		String visitsSql = "select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta from wizyta v" + 
+				"				 left join pacjent p on v.id_pacjenta = p.id" + 
+				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
+				"				 left join klient o on p.id_klienta = o.id;";
+		
+		System.out.println(visitsSql);
+		
+		Date current_date = new Date();
+		
+		
+		
+		try {
+			Connection connection = dS.getConnection();
+			PreparedStatement statement = connection.prepareStatement(visitsSql);
+			
+			ResultSet visit_rs = statement.executeQuery();
+			
+			while(visit_rs.next()) {
+				Visit visit = new Visit();
+				visit.setVisitId(visit_rs.getInt(1));
+				
+				String finalDate = DateParser.convertFormat(visit_rs.getString(2), "yyyy-MM-dd hh:mm:ss");
+				
+				visit.setVisit_date(finalDate);
 				Date datereference = visit_rs.getDate(2);
 				visit.setDoctor_id(visit_rs.getInt(3));
 				visit.setPatient_id(visit_rs.getInt(4));
@@ -209,7 +281,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 		
 		Date date = new Date();
 		
-		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH");
 		
 		String date_string =  df.format(date);
 		
@@ -217,17 +289,17 @@ public class VisitsDAOImpl implements VisitsDAO{
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y') and v.czy_rozpoczeta = 0 and p.id = " + patient_id + "  order by v.data asc) union all " +
+				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y %H') and v.czy_rozpoczeta = 0 and p.id = " + patient_id + "  order by v.data asc) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta from wizyta v" + 
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.czy_rozpoczeta = 0 and v.data > str_to_date('" + date_string + "','%m/%d/%Y') and p.id = " + patient_id + " order by v.czy_rozpoczeta desc) union all " +
+				" where  v.czy_rozpoczeta = 0 and v.data > str_to_date('" + date_string + "','%m/%d/%Y %H') and p.id = " + patient_id + " ) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta from wizyta v" + 
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.czy_rozpoczeta = 1 and p.id = " + patient_id + " order by v.czy_rozpoczeta desc) ;";
+				" where v.czy_rozpoczeta = 1 and p.id = " + patient_id + " ) ;";
 		
 		System.out.println(visitSql);
 		
@@ -242,7 +314,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			while(visit_rs.next()) {
 				Visit visit = new Visit();
 				visit.setVisitId(visit_rs.getInt(1));
-				visit.setVisit_date(visit_rs.getDate(2));
+				visit.setVisit_date(visit_rs.getDate(2).toString());
 				Date datereference = visit_rs.getDate(2);
 				visit.setDoctor_id(visit_rs.getInt(3));
 				visit.setPatient_id(visit_rs.getInt(4));
@@ -279,7 +351,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 	}
 	
 	@Override
-	public List<Visit> list(String doctor_name) {
+	public List<Visit> list(String email) {
 		List<Visit> visitList = new ArrayList<Visit>();
 		
 		Date date = new Date();
@@ -292,17 +364,17 @@ public class VisitsDAOImpl implements VisitsDAO{
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y') and v.czy_rozpoczeta = 0 and concat(u.imie, concat(' ',u.nazwisko)) = '" + doctor_name + "'  order by v.data asc) union all " +
+				" where  v.data = str_to_date('" + date_string + "','%m/%d/%Y %H') and v.czy_rozpoczeta = 0 and u.email = '" + email + "'  order by v.data asc) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta from wizyta v" + 
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.czy_rozpoczeta = 0 and concat(u.imie, concat(' ',u.nazwisko)) = '" + doctor_name + "' and v.data > str_to_date('" + date_string + "','%m/%d/%Y') order by v.czy_rozpoczeta asc) union all " +
+				" where  v.czy_rozpoczeta = 0 and u.email = '" + email + "' and v.data > str_to_date('" + date_string + "','%m/%d/%Y %H') order by v.czy_rozpoczeta asc) union all " +
 				"(select v.id, v.data, v.id_lekarza, v.id_pacjenta, v.opis, p.imie, concat(u.imie, concat(' ',u.nazwisko)) as doctor_name, concat(o.imie, concat(' ',o.nazwisko)) as owner_name, v.czy_rozpoczeta from wizyta v" + 
 				"				 left join pacjent p on v.id_pacjenta = p.id" + 
 				"				 left join uzytkownik u on v.id_lekarza = u.id " + 
 				"				 left join klient o on p.id_klienta = o.id" + 
-				" where  v.czy_rozpoczeta = 1 and concat(u.imie, concat(' ',u.nazwisko)) = '" + doctor_name + "' order by v.czy_rozpoczeta asc) ;";
+				" where  v.czy_rozpoczeta = 1 and u.email = '" + email + "' order by v.czy_rozpoczeta asc) ;";
 		
 		System.out.println(visitSql);
 		
@@ -317,7 +389,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			while(visit_rs.next()) {
 				Visit visit = new Visit();
 				visit.setVisitId(visit_rs.getInt(1));
-				visit.setVisit_date(visit_rs.getDate(2));
+				visit.setVisit_date(visit_rs.getDate(2).toString());
 				Date datereference = visit_rs.getDate(2);
 				visit.setDoctor_id(visit_rs.getInt(3));
 				visit.setPatient_id(visit_rs.getInt(4));
@@ -362,13 +434,14 @@ public class VisitsDAOImpl implements VisitsDAO{
 		String date_string;
 		int is_actual = 1;
 		
-		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH");
 		
 		Date date = new Date();
 		
 		date_string =  df.format(date);
 		
-		String addvisitSql = "insert into wizyta(data, id_lekarza, id_pacjenta, opis, czy_rozpoczeta) values(str_to_date('" + date_string + "','%m/%d/%Y')," + doctor_id + "," + patient_id +",'" + visit_description + "', " + is_actual+ ");";
+		String addvisitSql = "insert into wizyta(data, id_lekarza, id_pacjenta, opis, czy_rozpoczeta, cena) values(str_to_date('" + date_string + "','%m/%d/%Y %H')," + doctor_id + "," + patient_id +",'" + visit_description + "', " + is_actual+ ", " + visit.getPrice() + ");";
 		
 		System.out.println(addvisitSql);
 		
@@ -399,28 +472,62 @@ public class VisitsDAOImpl implements VisitsDAO{
 	
 
 	@Override
-	public void scheduleVisit(Visit visit) {
+	public boolean scheduleVisit(Visit visit) {
 		int visit_id;
 		int doctor_id = visit.getDoctor_id();
-		int patient_id = visit.getPatient_id();
+		Integer patient_id = null;
 		String visit_description = visit.getVisit_description();
 		String date_string;
 		int is_actual = 0;
 		
-		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		if(visit.getPatient_id()!=0) {
+			patient_id = visit.getPatient_id();
+		}
 		
-		Date date = visit.getVisit_date();
+		date_string = DateParser.convertVisitFormat(visit.getVisit_date().toString(), "dd/MM/yyyy HH");
 		
-		date_string =  df.format(date);
 		System.out.println(date_string);
 		
-		String addvisitSql = "insert into wizyta(data, id_lekarza, id_pacjenta, opis, czy_rozpoczeta) values(str_to_date('" + date_string + "','%m/%d/%Y')," + doctor_id + "," + patient_id +",'" + visit_description + "', " + is_actual+ ");";
+		//sprawdz czy planowana przez uzytkownika wizyta nie nachodzi na inna, istniejaca juz w systemie
+		String checkDateSql = "select v.id, v.data from wizyta v left join uzytkownik u on v.id_lekarza = u.id " + 
+				"left join uzytkownik_rola ur on u.id = ur.uzytkownik_id " + 
+				"left join dyzur d on d.uzytkownik_id = u.id " + 
+				"where ur.rola_id = 3 " + 
+				"and (v.data < DATE_ADD(str_to_date('" + date_string + "','%m/%d/%Y %H'), INTERVAL 2 HOUR) and str_to_date('" + date_string + "','%m/%d/%Y %H')< DATE_ADD(v.data, INTERVAL 2 HOUR)) " + 
+				"and u.id = "+ visit.getDoctor_id() + ";";
+		
+		//sprawdz czy wizyta jest w trakcie dyzuru danego lekarza
+		String checkShiftOverlapSql = "select d.rozpoczecie, d.id from uzytkownik u  " + 
+				"left join uzytkownik_rola ur on u.id = ur.uzytkownik_id " + 
+				"left join dyzur d on d.uzytkownik_id = u.id " + 
+				"where ur.rola_id = 3 " + 
+				"and (d.rozpoczecie <= str_to_date('" + date_string + "','%m/%d/%Y %H') and date_add(str_to_date('" + date_string + "','%m/%d/%Y %H'), interval 2 HOUR)<= d.zakonczenie) " + 
+				"and u.id = "+ visit.getDoctor_id() + ";";
+		
+		System.out.println(checkDateSql);
+		System.out.println(checkShiftOverlapSql);
+		
+		String addvisitSql = "insert into wizyta(data, id_lekarza, id_pacjenta, opis, czy_rozpoczeta, cena) values(str_to_date('" + date_string + "','%m/%d/%Y %H')," + doctor_id + "," + patient_id +",'" + visit_description + "', " + is_actual+ ", 0);";
 		
 		System.out.println(addvisitSql);
 		
 		try {
 			Connection connection = dS.getConnection();
 			PreparedStatement statement = connection.prepareStatement(addvisitSql, Statement.RETURN_GENERATED_KEYS);
+			
+			PreparedStatement statementCheck = connection.prepareStatement(checkDateSql);
+			PreparedStatement statementOverlap = connection.prepareStatement(checkShiftOverlapSql);
+			
+			ResultSet check_rs = statementCheck.executeQuery();
+			ResultSet overlap_rs = statementOverlap.executeQuery();
+			
+			if(check_rs.next()|| !overlap_rs.next()) {
+				statementCheck.close();
+				connection.close();
+				
+				return false;
+			}
+			
 			
 			int affected_rows = statement.executeUpdate();
 			
@@ -434,25 +541,24 @@ public class VisitsDAOImpl implements VisitsDAO{
             }
 			
 			statement.close();
+			connection.close();
+			
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return true;
 		
 	}
 
 
 	@Override
-	public void updateVisit(Visit visit) {
-		int visit_id;
+	public void closeVisit(Visit visit) {
 		
-		visit_id = visit.getVisitId();
-	
-		String visit_description = visit.getVisit_description();
 
 		int is_actual = 1;
 		
-		String updateVisitSql = "update wizyta set opis = '" + visit_description + "', czy_rozpoczeta = " + is_actual + ", id_lekarza = " + visit.getDoctor_id() + " where id = " + visit_id + ";";
+		String updateVisitSql = "update wizyta set opis = '" + visit.getVisit_description() + "', czy_rozpoczeta = " + is_actual + ", cena = '" + visit.getPrice() +  "' where id = " + visit.getVisitId() + ";";
 		
 		//TEST
 		System.out.println(updateVisitSql);

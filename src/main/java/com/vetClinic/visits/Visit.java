@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Visit {
 	private int visitId;
-	private Date visit_date;
+	private String visit_date;
 	private int doctor_id;
 	private int patient_id;
 	private String visit_description;
@@ -18,7 +18,7 @@ public class Visit {
 	private int qty;
 	private String name;
 	private String description;
-	private String price;
+	private float price;
 	
 	//TODO - get rid of this crappy functionality, replace with proper AJAX logic once learned
 		private int test;
@@ -29,13 +29,13 @@ public class Visit {
 	public void setVisitId(int visitId) {
 		this.visitId = visitId;
 	}
-	public Date getVisit_date() {
+	
+	public String getVisit_date() {
 		return visit_date;
 	}
-	public void setVisit_date(Date visit_date) {
+	public void setVisit_date(String visit_date) {
 		this.visit_date = visit_date;
 	}
-	
 	public int getPatient_id() {
 		return patient_id;
 	}
@@ -115,7 +115,11 @@ public class Visit {
 	public void setGood_name(String good_name) {
 		this.good_name = good_name;
 	}
-	
-	
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
 	
 }

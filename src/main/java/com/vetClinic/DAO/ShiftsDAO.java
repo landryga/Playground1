@@ -11,7 +11,7 @@ public interface ShiftsDAO {
     
     public List<Shift> list();
     
-    public List<Shift> list(String doctor_name);
+    public List<Shift> listDoctorsShifts();
 
 	public int addShift(Shift shift);
 	

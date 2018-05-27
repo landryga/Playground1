@@ -52,15 +52,15 @@ public class UserMaintainer {
 		this.username = username;
 	}
 	
-	public String getUserSurname() {
+	
+	public String getUserSurName() {
 		return userSurName;
 	}
 
-	public void setUserSurname(String userSurName) {
+	public void setUserSurName(String userSurName) {
 		this.userSurName = userSurName;
 	}
-	
-	
+
 	public boolean getIs_admin() {
 		return is_admin;
 	}

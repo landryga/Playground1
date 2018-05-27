@@ -1,0 +1,40 @@
+﻿
+<nav role="navigation" class="navbar navbar-default">
+	<div class="">
+		<a class="navbar-brand">WetPrzychodnia</a>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li><a href="/external">Strona Główna</a></li>
+			<li><a href="/clients-shifts">Grafik lekarzy</a></li>
+			<li><a href="/client-consultation">Zapisy</a></li>
+			
+			<li><a href="/info">O WetPrzychodnia</a></li>
+		</ul>
+		<ul class="nav navbar-right">
+		</ul>
+	</div>
+	
+	<script>
+	/*menu handler*/
+	$(function(){
+	  function stripTrailingSlash(str) {
+	    if(str.substr(-1) == '/') {
+	      return str.substr(0, str.length - 1);
+	    }
+	    return str;
+	  }
+
+	  var url = window.location.pathname;  
+	  var activePage = stripTrailingSlash(url);
+
+	  $('.nav li a').each(function(){  
+	    var currentPage = stripTrailingSlash($(this).attr('href'));
+
+	    if (activePage == currentPage) {
+	      $(this).parent().addClass('active'); 
+	    } 
+	  });
+	});
+	</script>
+</nav>

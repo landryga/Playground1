@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vetClinic.admin.AdminService;
 import com.vetClinic.admin.UserMaintainer;
+import com.vetClinic.environmentalHelper.DateParser;
 import com.vetClinic.goods.Good;
 
 @Controller
@@ -45,12 +46,16 @@ public class ShiftController {
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));   
 	}
 	
-	@RequestMapping(value="/list-shifts", method = RequestMethod.POST) 
+	@RequestMapping(value="/webservice/list-shifts", method = RequestMethod.POST) 
 	public String addShift(ModelMap model, @Valid Shift shift, BindingResult result) {
 		
 		String message =  "";
 		
-		if(result.hasErrors()) {
+		String helper = "";
+		
+		helper  = result.getRawFieldValue("user_id").toString();
+		
+		if(result.hasErrors()||!service.compareDates(shift)) {
 			for (Object object : result.getAllErrors()) {
 				if(object instanceof FieldError) {
 			        FieldError fieldError = (FieldError) object;
@@ -58,17 +63,26 @@ public class ShiftController {
 			        message = messageSource.getMessage(fieldError, null);
 			    }
 			}
+			if(!service.compareDates(shift)) {
+				message = "Start date must be before end date!";
+			}
+			AdminService usr = new AdminService();
 			model.addAttribute("message", message);
+			List<UserMaintainer> users = usr.retrieveUsers();
+			model.addAttribute("users", users);
 			model.addAttribute("shift", shift);
-			return "list-shifts";
+			return "/webservice/list-shifts";
 		}
+		
+		
+		System.out.println(shift.getEnd_date());
 		
 		service.addShift(shift);
 		model.clear();
 		return "redirect:list-shifts";
 	}
 	
-	@RequestMapping(value="/list-shifts", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/list-shifts", method = RequestMethod.GET) 
 	public String listShifts (ModelMap model){
 		
 		String events = null;
@@ -85,25 +99,16 @@ public class ShiftController {
 		AdminService usr = new AdminService();
 		
 		List<UserMaintainer> users = usr.retrieveUsers();
-		
-		List<String> userNames = new ArrayList<>();
-		
-		for (int i = 0; i< users.size(); i++) {
-			userNames.add(users.get(i).getEmail());
-		}
-		
 		model.addAttribute("users", users);
-		
-		model.addAttribute("userNames", userNames);
 		
 		model.addAttribute("data",  events);
 		
 		model.addAttribute("shift",  new Shift());
 		
-		return "list-shifts";
+		return "/webservice/list-shifts";
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET) 
+	@RequestMapping(value="/webservice/{id}", method = RequestMethod.GET) 
 	public String deleteShift(ModelMap model, @PathVariable("id")int id) {
 		
 		
@@ -111,7 +116,7 @@ public class ShiftController {
 		
 		model.clear();
 		
-		return "redirect:list-shifts";
+		return "redirect:/webservice/list-shifts";
 	}
 	
 	
