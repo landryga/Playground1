@@ -9,7 +9,7 @@ public class Visit {
 	private int patient_id;
 	private String visit_description;
 	private String patient_name;
-	private String owner_name;
+	private String owner_name = null;
 	private String doctor_name;
 	private String good_name;
 	private boolean past;
@@ -19,10 +19,21 @@ public class Visit {
 	private String name;
 	private String description;
 	private float price;
+	private String email;
+	private boolean complete_owner_data;
 	
 	//TODO - get rid of this crappy functionality, replace with proper AJAX logic once learned
 		private int test;
 	
+	
+		
+	public boolean isComplete_owner_data() {
+		
+		return complete_owner_data;
+	}
+	public void setComplete_owner_data(boolean complete_owner_data) {
+			this.complete_owner_data = complete_owner_data;
+	}
 	public int getVisitId() {
 		return visitId;
 	}
@@ -121,5 +132,19 @@ public class Visit {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 }

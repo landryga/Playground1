@@ -42,7 +42,7 @@ public class AdminController {
 	@RequestMapping(value="/webservice/add-user", method = RequestMethod.GET) 
 	public String showAddUserPage (ModelMap model) {
 		model.addAttribute("user", new UserMaintainer());
-		return "/webservice/user-add";
+		return "/webservice/add-user";
 	}
 	
 	@RequestMapping(value="/webservice/add-user", method = RequestMethod.POST) 
@@ -63,14 +63,23 @@ public class AdminController {
 		}
 		service.addUser(maintainer);
 		model.clear();
-		return "redirect:webservice/admin";
+		return "redirect:admin";
 	}
+	
+	@RequestMapping(value="/webservice/remove-user", method = RequestMethod.GET) 
+	public String removeUser (ModelMap model, @RequestParam int id) {
+		service.removeUser(id);
+
+		return "redirect:admin";
+	}
+	
+	
 	
 	@RequestMapping(value="/webservice/update-user", method = RequestMethod.GET)
 	public String updateUser( ModelMap model, @RequestParam int id) {
 		UserMaintainer user = service.retrieveUser(id);
 		model.addAttribute("user", user);
-		return "/webservice/user-add";
+		return "/webservice/add-user";
 	}
 	
 	@RequestMapping(value="/webservice/update-user", method = RequestMethod.POST)
@@ -78,7 +87,7 @@ public class AdminController {
 		
 		service.updateUser(user);
 		
-		return "redirect:webservice/list-users";
+		return "redirect:list-users";
 	}
 	
 	@RequestMapping(value="/webservice/change-calendar", method = RequestMethod.GET) 

@@ -24,5 +24,9 @@ public interface VisitsDAO {
 	void updateGoodsUsage(Visit visit);
 
 	public List<Visit> listAllVisits();
+
+	boolean checkVisit(Visit visit);
+
+	void removeVisit(int id);
 	
 }

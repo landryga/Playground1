@@ -325,10 +325,18 @@ public class VisitController {
 	public String scheduleVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "/webservice/visit-schedule";
+			return "/webservice/list-visits";
 		}
 		
-		AdminService adminService = new AdminService();
+		AdminService admin = new AdminService();
+		
+		String username = retrieveLoggedinUser();
+		
+		UserMaintainer usr = admin.retrieveUser(username);
+		
+		visit.setDoctor_id(usr.getDoctor_id());
+		
+		visit.setActive(true);
 		
 		service.scheduleVisit(visit);
 		
@@ -336,7 +344,14 @@ public class VisitController {
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
 		
-		return "list-visits";
+		return "/webservice/list-visits";
+	}
+	
+	@RequestMapping(value="/webservice/remove-visit", method = RequestMethod.GET) 
+	public String removeVisit (ModelMap model, @RequestParam int id) {
+		service.removeVisit(id);
+
+		return "/webservice/list-visits";
 	}
 
 	private String retrieveLoggedinUser() {
@@ -345,5 +360,7 @@ public class VisitController {
 		System.out.println("username is " + username);
 		return username;
 	}
+	
+	
 	
 }

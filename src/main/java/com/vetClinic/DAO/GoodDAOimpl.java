@@ -286,7 +286,7 @@ public class GoodDAOimpl implements GoodDAO {
 		float price = good.getPrice();
 		int id = good.getId();
 		
-		String updateGoodSQL = "update produkt set nazwa = '" + good_name + "', ilosc = " + quantity + ", cena = " + price + " where id =" + id + ";";
+		String updateGoodSQL = "update produkt set nazwa = '" + good_name + "', ilosc = " + quantity + ", cena = '" + price + "' where id =" + id + ";";
 		
 		try {
 			Connection connection = dS.getConnection();

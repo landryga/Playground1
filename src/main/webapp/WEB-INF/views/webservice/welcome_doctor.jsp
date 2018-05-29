@@ -16,8 +16,8 @@ Your visits today:
 		<tr>
 			<th>Patient name</th>
 			<th>Owner name</th>
+			<th>Email Właściciela</th>
 			<th>Visit date</th>
-			<th></th>
 			<th></th>
 		</tr>
 	</thead>
@@ -26,6 +26,7 @@ Your visits today:
 	<tr>
 			<td>${visits.patient_name}</td>
 			<td>${visits.owner_name}</td>
+			<td>${visits.email}</td>
 			<td>${visits.visit_date}</td>
 			<td></td>
 			
@@ -44,6 +45,14 @@ Your visits today:
 	</tbody>
 	
 </table>
+
+<script>
+var s = "test"
+
+
+
+
+</script>
 
 
 

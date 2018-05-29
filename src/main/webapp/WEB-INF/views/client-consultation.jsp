@@ -24,16 +24,23 @@
 		<font color="red">${message}</font>
 	
 	<fieldset class="form-group col-xs-3">
-		<form:label path="visit_date">Czas: </form:label>
+		<form:label path="visit_date">Data: </form:label>
 		<form:input path="visit_date" type = "text" class="form-control" id = 'datetimepicker1' required = "required"/>
 		<form:errors path="visit_date" cssClass="text-warning"/>
 	</fieldset>
 	
 	<fieldset class="form-group col-xs-3">
-		<form:label path="owner_name">Imie i nazwisko </form:label>
-		<form:input path="owner_name" type = "text" class="form-control" id = 'datetimepicker1' required = "required"/>
-		<form:errors path="owner_name" cssClass="text-warning"/>
+		<form:label path="email">Twój adres email </form:label>
+		<form:input path="email" type = "text" class="form-control"  required = "required"/>
+		<form:errors path="email" cssClass="text-warning"/>
 	</fieldset>
+	
+	<fieldset class="form-group col-xs-3">
+		<form:label path="patient_name">Twój adres email </form:label>
+		<form:input path="patient_name" type = "text" class="form-control"  required = "required"/>
+		<form:errors path="patient_name" cssClass="text-warning"/>
+	</fieldset>
+	
 	
 	
 	<br>

@@ -85,9 +85,7 @@ public class AdminService {
 			userDB.updateUserRole(userMaintainer);
 		}
 		
-		if(userMaintainer.isIs_doctor()!= dbRef.isIs_doctor()) {
-			userDB.updateDoctorBoolean(userMaintainer);
-		}
+		userDB.updateUser(dbRef);
 	}
 	
 	public List<UserMaintainer> retrieveUsers() {
@@ -120,6 +118,12 @@ public class AdminService {
 		users = userdao.listDoctors();
 			
 		return users;
+	}
+
+	public void removeUser(int id) {
+		UsersDAOimpl userdao = new UsersDAOimpl();
+		
+		userdao.removeUser(id);
 	}
 	
 }

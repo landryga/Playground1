@@ -15,4 +15,6 @@ public interface OwnersDAO {
 		void addOwner(Owner owner);
 		
 		void updateOwner(Owner owner);
+
+		int addOwnerInt(Owner owner);
 }

@@ -18,17 +18,18 @@ public class OwnerService {
 	
 	public void addOwner(Owner owner) {
 		
-		//JavaMailSenderImpl impl = conf.setMailSender();
-		
-		//MailHandler handler = new MailHandler();
-		
-		//handler.setMailSender(impl);
-		
-		//handler.handleMessage("testdevpw@gmail.com", owner.getEmail(), "Welcome to vetclinic", "Welcome to vetclinic");
-		
 		OwnersDAOimpl ownerdao = new OwnersDAOimpl();
 		
 		ownerdao.addOwner(owner);
+	}
+	
+	public int addOwnerInt(Owner owner) {
+		
+		OwnersDAOimpl ownerdao = new OwnersDAOimpl();
+		
+		int id = ownerdao.addOwnerInt(owner);
+		
+		return id;
 	}
 	
 	
@@ -65,11 +66,21 @@ public class OwnerService {
 	}
 	
 	public Owner retrieveOwner(int id) {
-		for (Owner owner : owners) {
-			if (owner.getOwner_id() == id)
-				return owner;
-		}
-		return null;
+		OwnersDAOimpl ownerdao = new OwnersDAOimpl();
+		
+		Owner owner = new Owner();
+		
+		owner = ownerdao.get(id);
+		return owner;
+	}
+	
+	public Owner retrieveOwner(String email) {
+		OwnersDAOimpl ownerdao = new OwnersDAOimpl();
+		
+		Owner owner = new Owner();
+		
+		owner= ownerdao.get(email);
+		return owner;
 	}
 	
 }

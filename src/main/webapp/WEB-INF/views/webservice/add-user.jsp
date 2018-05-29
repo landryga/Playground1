@@ -48,11 +48,15 @@ Dodaj użytkownika
 		<form:errors path="is_doctor" cssClass="text-warning"/>
 	</fieldset>
 	
-	<button type="submit" value = "Submit" class="btn btn-info btn-lg" ">Submit</button>
+	<button type="submit" onclick="myFunction()" value = "Submit" class="btn btn-info btn-lg" ">Submit</button>
 
 	
 	
 </form:form>
+
+<script>
+
+</script>
 
 </div>
 

@@ -19,7 +19,8 @@
 	<tr>
 			<td>${users.username}</td>
 			<td>${users.email}</td>
-			<td><a href="/webservice/update-user?id=${users.id}" class = "btn btn-info">Edit</a></td>
+			<td><a href="/webservice/update-user?id=${users.id}" class = "btn btn-info">Edit</a><a href="/webservice/remove-user?id=${users.id}" class = "btn btn-warning">Remove</a></td>
+			<td></td>
 		</tr>
 	</c:forEach>
 		

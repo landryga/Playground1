@@ -58,9 +58,16 @@ private static List<Patient> patients = new ArrayList<Patient>();
 	
 	public Patient retrievePatient(int id) {
 		for (Patient patient : patients) {
-			if (patient.getPatient_id() == id)
+			if (patient.getId() == id)
 				return patient;
 		}
 		return null;
+	}
+
+
+	public int addPatientInt(Patient patient) {
+		PatientsDAOimpl patientdao = new PatientsDAOimpl();
+		int id = patientdao.addPatientId(patient);
+		return id;
 	}
 }

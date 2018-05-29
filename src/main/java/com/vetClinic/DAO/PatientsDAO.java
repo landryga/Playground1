@@ -15,4 +15,6 @@ public void delete(int patient_id);
 	void addPatient(Patient patient);
 	
 	void updatePatient(Patient patient);
+
+	int addPatientId(Patient patient);
 }

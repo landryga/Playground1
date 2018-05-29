@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.mysql.jdbc.Statement;
 import com.vetClinic.admin.UserMaintainer;
 import com.vetClinic.dbhelper.DBconfig;
 import com.vetClinic.owner.Owner;
@@ -46,7 +47,9 @@ public class PatientsDAOimpl implements PatientsDAO {
 	public List<Patient> list() {
 		List<Patient> patientsList = new ArrayList<Patient>();
 		
-		String patientsSql = "select p.id, p.rasa, p.gatunek, p.plec, p.imie, p.id_klienta, p.data_urodzenia, p.data_zgonu, p.microchip_id, concat(o.imie, ' ' , o.nazwisko) as owner_name from pacjent p left join klient o on p.id_klienta=o.id;";
+		String helper = "";
+		
+		String patientsSql = "select p.id, p.rasa, p.gatunek, p.plec, p.imie, p.id_klienta, p.data_urodzenia, p.data_zgonu, p.microchip_id, concat(o.imie, ' ' , o.nazwisko) as owner_name, o.imie from pacjent p left join klient o on p.id_klienta=o.id;";
 		
 		try {
 			Connection connection = dS.getConnection();
@@ -55,7 +58,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
 				Patient patient = new Patient();
-				patient.setPatient_id(rs.getInt(1));
+				patient.setId(rs.getInt(1));
 				patient.setRace(rs.getString(2));
 				patient.setSpecies(rs.getString(3));
 				patient.setSex(rs.getBoolean(4));
@@ -70,8 +73,12 @@ public class PatientsDAOimpl implements PatientsDAO {
 					patient.setAlive(true);
 				}
 				else patient.setAlive(false);
-				patient.setOwner_name(rs.getString(10));
-				
+				helper = rs.getString(11);
+				if(helper.equals("null")) {
+					patient.setOwner_name("");
+				} else {
+					patient.setOwner_name(rs.getString(10));
+				}
 				patientsList.add(patient);
 			}
 		} catch (SQLException e) {
@@ -116,6 +123,56 @@ public class PatientsDAOimpl implements PatientsDAO {
 	public void updatePatient(Patient patient) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public int addPatientId(Patient patient) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		
+		int return_id = 0;
+		
+		String race = patient.getRace();
+		String species = patient.getSpecies();
+		int owner_id = patient.getOwner_id();
+		int sex = patient.isSex() ? 1 : 0;
+		String name = patient.getPatient_name();
+		Date birth_date = patient.getBirth_date();
+		int microchip_id = patient.getMicrochip_id();
+		String addPatientSql;
+		
+		
+		if(birth_date==null)
+			addPatientSql = "insert into pacjent(gatunek, plec, imie, id_klienta, microchip_id) values('" + species + "','" + sex + "','" + name  + "','" + owner_id + "','" +  microchip_id +  "');";
+		else if (race!="") {
+			addPatientSql = "insert into pacjent(rasa, gatunek, plec, imie, id_klienta, data_urodzenia, microchip_id) values('" + race +"','" + species + "','" + sex + "','" + name + "','" + owner_id + "','" + df.format(birth_date) + "','" + microchip_id +  "');";
+		}
+		else
+			addPatientSql = "insert into pacjent(gatunek, plec, imie, id_klienta, data_urodzenia, microchip_id) values('" + species + "','" + sex + "','" + name  + "','" + owner_id + "','" + df.format(birth_date) + "','" + microchip_id +  "');";
+		
+		System.out.println(addPatientSql);
+		
+		try {
+			Connection connection = dS.getConnection();
+			PreparedStatement statement = connection.prepareStatement(addPatientSql, Statement.RETURN_GENERATED_KEYS);
+			
+
+			int affectedRows = statement.executeUpdate();
+			
+			ResultSet generatedKeys = statement.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+				return_id = generatedKeys.getInt(1);
+            }
+			 else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+			
+			statement.close();
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return return_id;
 	}
 	
 }

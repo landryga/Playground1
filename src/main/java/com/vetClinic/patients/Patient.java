@@ -6,7 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 
 public class Patient {
 	
-	private int patient_id;
+	private int id;
 	private String race;
 	private String species;
 	private boolean sex;
@@ -18,11 +18,11 @@ public class Patient {
 	private int microchip_id;
 	private boolean alive;
 	
-	public int getPatient_id() {
-		return patient_id;
+	public int getId() {
+		return id;
 	}
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
+	public void setId(int patient_id) {
+		this.id = patient_id;
 	}
 	public String getRace() {
 		return race;

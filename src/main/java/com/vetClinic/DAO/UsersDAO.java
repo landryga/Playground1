@@ -26,5 +26,7 @@ public interface UsersDAO {
 	void updateDoctorBoolean(UserMaintainer maintainer);
 	
 	public boolean checkIfUsernameUnique (String username);
+
+	void removeUser(int id);
     
 }

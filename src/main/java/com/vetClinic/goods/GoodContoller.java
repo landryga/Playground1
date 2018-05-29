@@ -41,7 +41,7 @@ public class GoodContoller {
 		
 		service.addGood(good);
 		model.clear();
-		return "redirect:/webservice/goods";
+		return "redirect:goods";
 	}
 	
 	@RequestMapping(value="/webservice/good-update", method = RequestMethod.GET) 
@@ -69,6 +69,6 @@ public class GoodContoller {
 		
 		model.clear();
 		
-		return "/webservice/redirect:goods";
+		return "redirect:goods";
 	}
 }

@@ -35,7 +35,7 @@ public class FinanceDAOimpl implements FinanceDAO {
 				"select v.data as date, vg.ilosc, g.cena, vg.ilosc * g.cena as income from produkt_wizyta vg " + 
 				"left join produkt g " + 
 				"on vg.produkt_id = g.id " + 
-				"left join visit v " + 
+				"left join wizyta v " + 
 				"on vg.wizyta_id = v.id " + 
 				"order by date desc " + 
 				") V group by date order by date desc;";

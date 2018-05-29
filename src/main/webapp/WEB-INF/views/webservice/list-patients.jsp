@@ -12,10 +12,10 @@
 
 	<thead>
 		<tr>
-			<th>Patient name</th>
-			<th>Species</th>
-			<th>Owner</th>
-			<th></th>
+			<th>Pacjent</th>
+			<th>Gatunek</th>
+			<th>Właściciel</th>
+			<th>Akcje</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -24,7 +24,7 @@
 			<td>${patients.patient_name}</td>
 			<td>${patients.species}</td>
 			<td>${patients.owner_name}</td>
-			<td><a href="/webservice/list-visits?patient_id=${patients.patient_id}" class = "btn btn-info">Visits</a></td>
+			<td><a href="/webservice/list-visits?patient_id=${patients.id}" class = "btn btn-info">Wizyty</a>    <a href="/webservice/list-patient-examinations?id_patient=${patients.id}" class = "btn btn-info">Badania</a></td>
 		</tr>
 	</c:forEach>
 		

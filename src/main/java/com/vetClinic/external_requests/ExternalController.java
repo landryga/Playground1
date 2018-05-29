@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.vetClinic.admin.AdminService;
 import com.vetClinic.admin.UserMaintainer;
+import com.vetClinic.mail.MailHandler;
+import com.vetClinic.owner.Owner;
+import com.vetClinic.owner.OwnerService;
+import com.vetClinic.patients.Patient;
+import com.vetClinic.patients.PatientService;
 import com.vetClinic.shifts.Shift;
 import com.vetClinic.shifts.ShiftBuilder;
 import com.vetClinic.shifts.ShiftService;
@@ -80,6 +87,8 @@ public class ExternalController {
 	public String addShift(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		VisitService service = new VisitService();
+		OwnerService oService = new OwnerService();
+		PatientService pService = new PatientService();
 		
 		String message =  "";
 		
@@ -103,7 +112,7 @@ public class ExternalController {
 			return "/client-consultation";
 		}
 		
-		if(!service.scheduleVisit(visit)) {
+		if(!service.checkVisit(visit)) {
 			message = "Wybierz wolny termin w trakcie dyzuru lekarza ";
 			model.addAttribute("message", message);
 			
@@ -127,6 +136,45 @@ public class ExternalController {
 			model.addAttribute("visit", visit);
 			model.addAttribute("data",  events);
 			return "/client-consultation";
+		} else {
+			
+			Owner owner = new Owner();
+			Patient patient = new Patient();
+			
+			owner.setEmail(visit.getEmail());
+			patient.setPatient_name(visit.getPatient_name());
+			
+			//check if there is already owner with given email
+			Owner owner_reference = oService.retrieveOwner(visit.getEmail());
+			
+			if(!owner_reference.equals(null)) {
+				patient.setOwner_id(owner_reference.getOwner_id());
+			} else {
+				int client_id = oService.addOwnerInt(owner);
+				patient.setOwner_id(client_id);
+			}
+			
+			int patient_id = pService.addPatientInt(patient);
+			
+			visit.setPatient_id(patient_id);
+			
+			service.scheduleVisit(visit);
+			
+			MailHandler handler = new MailHandler();
+			
+			AdminService adm = new AdminService();
+			
+			
+			try {
+				handler.send("testdevpw@gmail.com", visit.getEmail(), "Data wizyty: " + visit.getVisit_date() + ", Lekarz:" + adm.retrieveUser(visit.getDoctor_id()).getUsername() + adm.retrieveUser(visit.getDoctor_id()).getUserSurName()  , "VetPrzychodnia: Zapisano na wizyte pacjenta " + visit.getPatient_name());
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		model.clear();
 		return "redirect:client-consultation";

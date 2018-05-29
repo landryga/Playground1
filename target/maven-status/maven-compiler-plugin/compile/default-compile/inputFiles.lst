@@ -10,11 +10,13 @@ C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClini
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\todo\TodoService.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\todo\Todo.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\goods\GoodService.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\examination\ExaminationType.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\login\LogoutController.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\PatientsDAOimpl.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\UsersDAO.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\environmentalHelper\ObjectComparator.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\patients\PatientService.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\ExaminationDAO.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\OwnersDAO.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\goods\Good.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\visits\Visit.java
@@ -22,6 +24,8 @@ C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClini
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\owner\Owner.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\AdminController.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\UserAddConstraint.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\ExaminationDAOimpl.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\examination\ExaminationController.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\visits\VisitBuilder.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\ShiftsDAOimpl.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\patients\Patient.java
@@ -39,10 +43,12 @@ C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClini
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\VisitsDAO.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\shifts\Shift.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\patients\PatientController.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\examination\Examination.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\owner\OwnerService.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\GoodDAOimpl.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\finances\FinanceDay.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\UsersDAOimpl.java
+C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\examination\ExaminationService.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\admin\UserValidator.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\shifts\ShiftBuilder.java
 C:\Users\SourceJW\eclipse-workspace\Veterinary_Clinic\src\main\java\com\vetClinic\DAO\ConsultationDAOimpl.java

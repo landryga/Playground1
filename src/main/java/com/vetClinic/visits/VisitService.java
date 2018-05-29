@@ -28,7 +28,30 @@ public class VisitService {
 	public boolean scheduleVisit(Visit visit) {
 		VisitsDAOImpl visitdao = new VisitsDAOImpl();
 		
+		String oName = "";
+		
+		oName = visit.getOwner_name();
+		
+		if(oName == null || oName.isEmpty()) {
+			visit.setComplete_owner_data(false);
+		}
+		else {
+			visit.setComplete_owner_data(true);
+		}
+		
 		if(!visitdao.scheduleVisit(visit)) {
+			return false;
+		} else
+		{
+			return true;
+		}
+		
+	}
+	
+	public boolean checkVisit(Visit visit) {
+		VisitsDAOImpl visitdao = new VisitsDAOImpl();
+		
+		if(!visitdao.checkVisit(visit)) {
 			return false;
 		} else
 		{
@@ -121,6 +144,13 @@ public class VisitService {
 	
 	public List<VisitGood> retrieveVisitGoods() {
 		return visitgoods;
+	}
+
+	public void removeVisit(int id) {
+		VisitsDAOImpl visitdao = new VisitsDAOImpl();
+		
+		visitdao.removeVisit(id);
+		
 	}
 	
 }

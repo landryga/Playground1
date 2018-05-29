@@ -33,12 +33,15 @@ ${errormessage}
 			
 			<td></td>
 			<td>
-			    <c:if test="${visits.active}">
+			    <c:if test="${ visits.active}">
 			        <a href="/webservice/visit-add?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-success">Begin visit</a>
 			    </c:if>
 			    
 			    <c:if test="${not visits.active &&  visits.past}">
 					<a href="/webservice/visit-view?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-info"> &nbsp&nbsp&nbsp  View  &nbsp&nbsp&nbsp  </a>
+			 	</c:if>
+			 	<c:if test="${not visits.active && not visits.past }">
+					<a href="/webservice/remove-visit?id=${visits.visitId}" class = "btn btn-warning"> &nbsp&nbsp&nbsp  Remove visit  &nbsp&nbsp&nbsp  </a>
 			 	</c:if></td>
 		</tr>
 	</c:forEach>
