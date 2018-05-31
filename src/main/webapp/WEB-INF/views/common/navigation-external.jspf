@@ -9,7 +9,11 @@
 			<li><a href="/clients-shifts">Grafik lekarzy</a></li>
 			<li><a href="/client-consultation">Zapisy</a></li>
 			
-			<li><a href="/info">O WetPrzychodnia</a></li>
+			<li><a href="/info">O VetPrzychodnia</a></li>
+		</ul>
+		
+		<ul class="nav navbar-right">
+			<li><a href="/login"">Zaloguj się     </a></li>
 		</ul>
 		
 		<ul class="nav navbar-right">

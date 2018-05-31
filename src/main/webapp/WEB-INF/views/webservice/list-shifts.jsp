@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -71,11 +71,11 @@ $(function() {
 });
 
 $(function () {
-    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH:mm'}).data('DateTimePicker').date();
+    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH:mm', minDate: new Date()}).data('DateTimePicker').date();
 });
 
 $(function () {
-    $('#datetimepicker2').datetimepicker({format: 'DD/MM/YYYY HH:mm'}).data('DateTimePicker').date();
+    $('#datetimepicker2').datetimepicker({format: 'DD/MM/YYYY HH:mm', minDate: new Date()}).data('DateTimePicker').date();
 });
 
 

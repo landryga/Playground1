@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -6,13 +6,13 @@
 <!-- TODO - remove this JSP completely from the project -->
 <div class="container">
 
-Hi ${name} <br/>
+Witaj ${name} <br/>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Date</th>
-			<th>Income</th>
+			<th>Data</th>
+			<th>Przychód</th>
 			<th></th>
 		</tr>
 	</thead>

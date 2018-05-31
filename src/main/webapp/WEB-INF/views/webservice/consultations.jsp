@@ -1,13 +1,13 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class = "container">
 	
-<header>Select action:</header></br>
+<header>Wybierz akcję</header></br>
 	
 <div>
-	<a class="btn btn-success" href = "/webservice/consultation-add">Add New Consultation</a>
+	<a class="btn btn-success" href = "/webservice/consultation-add">Dodaj nową konsultację</a>
 </div>
 	
 <div>
@@ -15,8 +15,8 @@
 
 	<thead>
 		<tr>
-			<th>Consultation name</th>
-			<th>price</th>
+			<th>Nazwa</th>
+			<th>Cena</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -29,7 +29,7 @@
 			
 			
 			<td></td>
-			<td><a href="/webservice/consultation-update?consultation_id=${consultations.consultation_id}" class = "btn btn-success">Edit</a></td>
+			<td><a href="/webservice/consultation-update?consultation_id=${consultations.consultation_id}" class = "btn btn-success">Edytuj</a></td>
 		</tr>
 	</c:forEach>
 		

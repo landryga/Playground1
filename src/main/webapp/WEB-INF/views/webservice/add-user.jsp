@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -31,7 +31,7 @@ Dodaj użytkownika
 	<font color="red">${message}</font>
 	
 	<fieldset class="form-group">
-		<form:label path="is_admin">Role</form:label>
+		<form:label path="is_admin">Rola</form:label>
 		<form:select path="is_admin" type = "select" class="form-control" required = "required">
 			<form:option value="false">User</form:option>
 			<form:option value="true">Admin</form:option>
@@ -40,7 +40,7 @@ Dodaj użytkownika
 	</fieldset>
 	
 	<fieldset class="form-group">
-		<form:label path="is_doctor">Is doctor?</form:label>
+		<form:label path="is_doctor">Czy jest doktorem?</form:label>
 		<form:select path="is_doctor" type = "select" class="form-control" required = "required">
 			<form:option value="true">Yes</form:option>
 			<form:option value="false">No</form:option>
@@ -48,7 +48,7 @@ Dodaj użytkownika
 		<form:errors path="is_doctor" cssClass="text-warning"/>
 	</fieldset>
 	
-	<button type="submit" onclick="myFunction()" value = "Submit" class="btn btn-info btn-lg" ">Submit</button>
+	<button type="submit" onclick="myFunction()" value = "Submit" class="btn btn-info btn-lg" ">Zatwierdź</button>
 
 	
 	

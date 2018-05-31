@@ -55,7 +55,7 @@ public class AdminService {
 		userdao.addUser(userMaintainer);
 		
 		try {
-			handler.send("testdevpw@gmail.com", userMaintainer.getEmail(), "Witaj w programie WetPrzychodnia/n/n Twoje haslo to: " + password, "Witaj w programie WetPrzychodnia");
+			handler.send("testdevpw@gmail.com", userMaintainer.getEmail(), "Witaj w programie WetPrzychodnia. Twoje haslo to: " + password, "Witaj w programie WetPrzychodnia");
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,23 +69,9 @@ public class AdminService {
 	public void updateUser(UserMaintainer userMaintainer) {
 		UsersDAOimpl userdao = new UsersDAOimpl();
 		
-	
-		UserMaintainer dbRef = new UserMaintainer();
+		userdao.updateUserRole(userMaintainer);
 		
-		int UserId = userMaintainer.getId();
-		
-		UsersDAOimpl userDB = new UsersDAOimpl();
-		
-		dbRef = userDB.get(UserId);
-		
-		//userMaintainer.getIs_admin();
-		
-		if(userMaintainer.getIs_admin() != dbRef.getIs_admin()) {
-			
-			userDB.updateUserRole(userMaintainer);
-		}
-		
-		userDB.updateUser(dbRef);
+		userdao.updateUser(userMaintainer);
 	}
 	
 	public List<UserMaintainer> retrieveUsers() {

@@ -1,14 +1,15 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 <div class="container">
 
 <div>
-Welcome ${name} ! </br></br>
+Witaj ${name} ! </br></br>
 </div>
 
 <div id='calendar'></div>
 
+<div>Kalendarz wizyt:</div>
 <script>
 
 	$(function() {

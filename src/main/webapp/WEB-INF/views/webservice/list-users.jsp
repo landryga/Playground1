@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -9,7 +9,7 @@
 
 	<thead>
 		<tr>
-			<th>Name</th>
+			<th>Imię</th>
 			<th>Email</th>
 			<th></th>
 		</tr>
@@ -19,7 +19,7 @@
 	<tr>
 			<td>${users.username}</td>
 			<td>${users.email}</td>
-			<td><a href="/webservice/update-user?id=${users.id}" class = "btn btn-info">Edit</a><a href="/webservice/remove-user?id=${users.id}" class = "btn btn-warning">Remove</a></td>
+			<td><a href="/webservice/update-user?id=${users.id}" class = "btn btn-info">Edytuj</a>&nbsp&nbsp&nbsp<a href="/webservice/remove-user?id=${users.id}" class = "btn btn-warning">Usuń użytkownika</a></td>
 			<td></td>
 		</tr>
 	</c:forEach>

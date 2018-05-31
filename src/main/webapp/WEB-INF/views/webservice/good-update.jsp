@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -9,19 +9,19 @@
 	
 	
 	<fieldset class="form-group">
-		<form:label path="name">Good name: </form:label>
+		<form:label path="name">Nazwa produktu: </form:label>
 		<form:input path="name" type = "text" class="form-control" value = "${good.name}" required = "required"/>
 		<form:errors path="name" cssClass="text-warning"/>
 	</fieldset>
 	
 	<fieldset class="form-group">
-		<form:label path="quantity">Good quantity: </form:label>
+		<form:label path="quantity">Ilość: </form:label>
 		<form:input path="quantity" type = "text" class="form-control" value = "${good.quantity}" required = "required"/>
 		<form:errors path="quantity" cssClass="text-warning"/>
 	</fieldset>
 	
 	<fieldset class="form-group">
-		<form:label path="price">Good price: </form:label>
+		<form:label path="price">Cena </form:label>
 		<form:input path="price" type = "text" class="form-control" value = "${good.price}" required = "required"/>
 		<form:errors path="price" cssClass="text-warning"/>
 	</fieldset>

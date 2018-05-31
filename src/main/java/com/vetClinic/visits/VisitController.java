@@ -256,7 +256,7 @@ public class VisitController {
 	public String updateVisit(ModelMap model, @Valid Visit visit, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "/webservice/visit-schedule";
+			return "/webservice/visit-update";
 		}
 		
 		visit.setActive(false);
@@ -297,9 +297,11 @@ public class VisitController {
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
 		
-		model.clear();
+		
 		
 		model.addAttribute("visit_description", visit.getVisit_description());
+		
+		model.clear();
 		
 		return "redirect:/webservice/list-visits?patient_id=" +  visit.getPatient_id();
 		
@@ -328,6 +330,7 @@ public class VisitController {
 			return "/webservice/list-visits";
 		}
 		
+		
 		AdminService admin = new AdminService();
 		
 		String username = retrieveLoggedinUser();
@@ -338,22 +341,49 @@ public class VisitController {
 		
 		visit.setActive(true);
 		
-		service.scheduleVisit(visit);
+		if(!service.scheduleVisit(visit)) {
+			
+			List<UserMaintainer> users = admin.retrieveDoctors();
+			
+			model.addAttribute("users", users);
+			model.addAttribute("errormessage", "Podany termin jest już zajety lub jest poza grafikiem danego lekarza");
+			return "/webservice/visit-schedule";
+		};
 		
-		model.clear();
+		
 		
 		model.addAttribute("patient_id", visit.getPatient_id());
 		
-		return "/webservice/list-visits";
+		return "redirect:/webservice/list-visits";
 	}
 	
 	@RequestMapping(value="/webservice/remove-visit", method = RequestMethod.GET) 
 	public String removeVisit (ModelMap model, @RequestParam int id) {
+		
+		Visit visit = new Visit();
+		
+		visit = service.retrieveVisit(id);
+		
+		int patient_id = visit.getPatient_id();
+		
+		
 		service.removeVisit(id);
 
-		return "/webservice/list-visits";
-	}
 
+		model.clear();
+		model.addAttribute("patient_id", patient_id);
+		
+		return "redirect:/webservice/list-visits";
+	}
+	/*
+	@RequestMapping(value="/webservice/remove-visit", method = RequestMethod.POST) 
+	public String postRemoveVisit(ModelMap model, BindingResult result) {
+		
+		
+		
+		return "redirect:/webservice/list-visits";
+	}
+*/
 	private String retrieveLoggedinUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();

@@ -1,12 +1,16 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header-external.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation-external.jspf" %>
+
 
 <div class="container">
 
 
 
 <h2>Zapisz się na wizytę</h2>
+<h4>Sprawdź grafik lekarzy i zapisz się na wizytę</h4>
+
+<font color="red">${message}</font>
 
 <form:form method="POST" commandName = "visit">
 <br>
@@ -21,13 +25,15 @@
 		<form:errors path="doctor_id" cssClass="text-warning"/>
 	</fieldset>
 	
-		<font color="red">${message}</font>
+		
 	
 	<fieldset class="form-group col-xs-3">
 		<form:label path="visit_date">Data: </form:label>
 		<form:input path="visit_date" type = "text" class="form-control" id = 'datetimepicker1' required = "required"/>
 		<form:errors path="visit_date" cssClass="text-warning"/>
 	</fieldset>
+	
+	
 	
 	<fieldset class="form-group col-xs-3">
 		<form:label path="email">Twój adres email </form:label>
@@ -36,7 +42,7 @@
 	</fieldset>
 	
 	<fieldset class="form-group col-xs-3">
-		<form:label path="patient_name">Twój adres email </form:label>
+		<form:label path="patient_name">Imię pacjenta </form:label>
 		<form:input path="patient_name" type = "text" class="form-control"  required = "required"/>
 		<form:errors path="patient_name" cssClass="text-warning"/>
 	</fieldset>
@@ -78,7 +84,7 @@ $(function() {
 });
 
 $(function () {
-    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH'}).data('DateTimePicker').date();
+    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH', minDate: new Date()}).data('DateTimePicker').date();
 });
 
 

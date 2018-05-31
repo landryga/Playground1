@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
@@ -7,7 +7,7 @@
 Nowe badanie </br></br>
 <form:input path="patient_id" id="patient_id" type="hidden" value="${patient_id}"/>
 
-<button class = "btn btn-success" type="submit" id = "btn2">Zakoncz badanie</button>
+<button class = "btn btn-success" type="submit" id = "btn2">Zakończ badanie</button>
 </br></br>
 <form:form method="POST" commandName = "examination" id="form1">
 

@@ -1,20 +1,20 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class="container">
 
-New visit </br></br>
+Nowa wizyta </br></br>
 
 
-<button class = "btn btn-success" type="submit" id = "btn2">End Visit</button>
+<button class = "btn btn-success" type="submit" id = "btn2">Zakończ wizytę</button>
 </br></br>
 <form:form method="POST" commandName = "visit" id="form1">
 	
 	
 	<fieldset class="form-group">
 	
-		<form:label path="visit_description">visit_description</form:label>
+		<form:label path="visit_description">Opis</form:label>
 		<form:textarea path="visit_description" type = "text" class="form-control" cols="50" rows="10"  required = "required" />
 		<form:errors path="visit_description" cssClass="text-warning"/>
 	
@@ -31,7 +31,7 @@ New visit </br></br>
 
 
 
-<button class = "btn btn-success" type="button" id = "btn1">Add Good</button> </br></br>
+<button class = "btn btn-success" type="button" id = "btn1">Dodaj produkt</button> </br></br>
 
 <table class="table table-striped">
 
@@ -40,7 +40,7 @@ New visit </br></br>
 	<tr>
 			<td>
 				<fieldset class="form-group">
-					<form:label path="qty">Good</form:label>
+					<form:label path="qty">Produkt</form:label>
 					<form:select path="good_name" type = "select" class="form-control" required = "required">
 						<form:options items="${good_name}" />
 					</form:select>
@@ -49,7 +49,7 @@ New visit </br></br>
 			</td>
 			<td>
 				<fieldset class="form-group">
-					<form:label path="qty">Quantity</form:label>
+					<form:label path="qty">Ilość</form:label>
 					<form:input path="qty" type = "text" class="form-control" required = "required"/>
 					<form:errors path="qty" cssClass="text-warning"/>
 				</fieldset>
@@ -64,8 +64,8 @@ New visit </br></br>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Good name</th>
-			<th>quantity</th>
+			<th>Nazwa produktu</th>
+			<th>Ilość</th>
 			<th></th>
 			<th></th>
 		</tr>

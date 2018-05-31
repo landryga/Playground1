@@ -296,10 +296,15 @@ public class UsersDAOimpl implements UsersDAO {
 		
 		jdbcTemplate.execute(deleteQuery);
 		
+		jdbcTemplate.execute("insert into uzytkownik_rola(rola_id, uzytkownik_id) values(2,"+userid+" );");
+		
 		if(maintainer.getIs_admin()) {
 			jdbcTemplate.execute("insert into uzytkownik_rola(rola_id, uzytkownik_id) values(1, "+userid+");");
 		}
-		jdbcTemplate.execute("insert into uzytkownik_rola(rola_id, uzytkownik_id) values(2,"+userid+" );");
+		if(maintainer.isIs_doctor()) {
+			jdbcTemplate.execute("insert into uzytkownik_rola(rola_id, uzytkownik_id) values(3, "+userid+");");
+		}
+		
 		
 		
 	}
@@ -328,6 +333,7 @@ public class UsersDAOimpl implements UsersDAO {
 
 	@Override
 	public void removeUser(int id) {
+		String removeShiftsSql = "delete from dyzur where uzytkownik_id = " + id + ";";
 		String removeRolesSql = "delete from uzytkownik_rola where uzytkownik_id = " + id + ";";
 		String removePassSql = "delete from uzytkownik_haslo where id_uzytkownika = " + id + ";";
 		String removeUserSql = "delete from uzytkownik where id = " + id + ";";
@@ -335,10 +341,12 @@ public class UsersDAOimpl implements UsersDAO {
 		try {
 			Connection connection = dS.getConnection();
 			
+			PreparedStatement removeShiftsStatement = connection.prepareStatement(removeShiftsSql);
 			PreparedStatement removeRoleStatement = connection.prepareStatement(removeRolesSql);
 			PreparedStatement removePassStatement = connection.prepareStatement(removePassSql);
 			PreparedStatement removeUserStatement = connection.prepareStatement(removeUserSql);
 			
+			removeShiftsStatement.executeUpdate();
 			removeRoleStatement.executeUpdate();
 			removePassStatement.executeUpdate();
 			removeUserStatement.executeUpdate();

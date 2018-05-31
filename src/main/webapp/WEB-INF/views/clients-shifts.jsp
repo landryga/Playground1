@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header-external.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation-external.jspf" %>
 

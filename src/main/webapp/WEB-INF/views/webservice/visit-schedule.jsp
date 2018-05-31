@@ -1,10 +1,12 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class="container">
 
-New visit </br></br>
+Zaplanuj wizytę </br></br>
+
+<font color="red">${errormessage}</font>
 
 
 
@@ -13,8 +15,8 @@ New visit </br></br>
 <div class = "row">
 	
 	<fieldset class="form-group col-xs-4">
-	<form:label path="visit_date">Choose date: </form:label>
-		<form:input path="visit_date" type="text" class="form-control" required = "required" id="datetimepicker1"/>
+	<form:label path="visit_date">Wybierz datę </form:label>
+		<form:input path="visit_date" type="text" class="form-control" required = "required" id="datetimepicker1" /></span>
 		<form:errors path="visit_date" cssClass="text-warning"/>
 	</fieldset>
 
@@ -43,7 +45,7 @@ New visit </br></br>
 
   <script>
   $(function () {
-	    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH'}).data('DateTimePicker').date();
+	    $('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY HH', minDate: new Date()}).data('DateTimePicker').date();
 	});
   </script>
   

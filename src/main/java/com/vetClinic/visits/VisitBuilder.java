@@ -20,6 +20,8 @@ public class VisitBuilder {
 			visitString+= " id : '" + visit.getVisitId() + "',";
 			if(!forClients) {
 				visitString+= " title : '" + visit.getOwner_name() + "',";
+			} else {
+				visitString+= " title : '" + visit.getDoctor_name() + "',";
 			}
 			visitString+= " start : '" + DateParser.convertEventFormat(visit.getVisit_date(), "MM/dd/yyyy HH") + "',";
 			visitString+= " duration : { hours:1 }, ";

@@ -1,4 +1,4 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 <div class="container">
@@ -8,9 +8,9 @@
 
 	<thead>
 		<tr>
-			<th>Name</th>
-			<th>Surname</th>
-			<th>Telephone number</th>
+			<th>Imię</th>
+			<th>Nazwisko</th>
+			<th>Numer telefonu</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -20,7 +20,7 @@
 			<td>${owners.name}</td>
 			<td>${owners.surname}</td>
 			<td>${owners.telephone_number}</td>
-			<td><a href="/webservice/patient-add?owner_id=${owners.owner_id}" class = "btn btn-info">Edit</a></td>
+			<td><a href="/webservice/patient-add?owner_id=${owners.owner_id}" class = "btn btn-info">Wybierz</a></td>
 		</tr>
 	</c:forEach>
 		

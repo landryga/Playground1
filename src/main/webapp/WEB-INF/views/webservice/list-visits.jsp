@@ -1,14 +1,14 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class="container">
 
-Visits for patient ${patient_name} </br></br>
+Wizyty pacjenta ${patient_name} </br></br>
 
 <div>
-	<a class="btn btn-success" href = "/webservice/visit-add?patient_id=${patient_id}&doctor_id=${doctor_id}&visitId=0">Add new visit</a>
-	<a class="btn btn-success" href = "/webservice/visit-schedule?patient_id=${patient_id}">Schedule visit</a>
+	<a class="btn btn-success" href = "/webservice/visit-add?patient_id=${patient_id}&doctor_id=${doctor_id}&visitId=0">Dodaj wizytę</a>
+	<a class="btn btn-success" href = "/webservice/visit-schedule?patient_id=${patient_id}">Zaplanuj wizytę</a>
 	
 </div>
 
@@ -18,8 +18,8 @@ ${errormessage}
 
 	<thead>
 		<tr>
-			<th>Doctor name</th>
-			<th>Visit date</th>
+			<th>Lekarz</th>
+			<th>Data wizyty</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -34,14 +34,14 @@ ${errormessage}
 			<td></td>
 			<td>
 			    <c:if test="${ visits.active}">
-			        <a href="/webservice/visit-add?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-success">Begin visit</a>
+			        <a href="/webservice/visit-add?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-success">Rozpocznij wizytę</a>
 			    </c:if>
 			    
 			    <c:if test="${not visits.active &&  visits.past}">
-					<a href="/webservice/visit-view?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-info"> &nbsp&nbsp&nbsp  View  &nbsp&nbsp&nbsp  </a>
+					<a href="/webservice/visit-view?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${patient_id}" class = "btn btn-info"> &nbsp&nbsp&nbsp  Przeglądaj  &nbsp&nbsp&nbsp  </a>
 			 	</c:if>
 			 	<c:if test="${not visits.active && not visits.past }">
-					<a href="/webservice/remove-visit?id=${visits.visitId}" class = "btn btn-warning"> &nbsp&nbsp&nbsp  Remove visit  &nbsp&nbsp&nbsp  </a>
+					<a href="/webservice/remove-visit?id=${visits.visitId}" class = "btn btn-warning"> &nbsp&nbsp&nbsp  Usuń wizytę  &nbsp&nbsp&nbsp  </a>
 			 	</c:if></td>
 		</tr>
 	</c:forEach>

@@ -1,11 +1,11 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class="container">
 
 <div>
-<a class="btn btn-success" href = "/webservice/owner-add">Add new patient</a>
+<a class="btn btn-success" href = "/webservice/owner-add">Dodaj nowego pacjentat</a>
 </div>
 
 <table class="table table-striped">

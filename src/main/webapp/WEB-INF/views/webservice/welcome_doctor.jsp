@@ -1,12 +1,12 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class="container">
 
 <div>
-Welcome doctor ${name} ! </br></br>
-Your visits today:
+Witaj doktorze ${name} ! </br></br>
+Twoje wizyty:
 </div>
 
 
@@ -14,10 +14,10 @@ Your visits today:
 
 	<thead>
 		<tr>
-			<th>Patient name</th>
-			<th>Owner name</th>
+			<th>Imię pacjenta</th>
+			<th>Imię właściciela</th>
 			<th>Email Właściciela</th>
-			<th>Visit date</th>
+			<th>Data wizyty</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -32,11 +32,11 @@ Your visits today:
 			
 			    <td>
 			    <c:if test="${visits.active}">
-			        <a href="/webservice/visit-add?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${visits.patient_id}" class = "btn btn-success">Begin visit</a>
+			        <a href="/webservice/visit-add?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${visits.patient_id}" class = "btn btn-success">Rozpocznij wizytę</a>
 			    </c:if>
 			    
 			    <c:if test="${not visits.active &&  visits.past}">
-					<a href="/webservice/visit-view?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${visits.patient_id}" class = "btn btn-info"> &nbsp&nbsp&nbsp  View  &nbsp&nbsp&nbsp  </a>
+					<a href="/webservice/visit-view?visitId=${visits.visitId}&doctor_id=${doctor_id}&patient_id=${visits.patient_id}" class = "btn btn-info"> &nbsp&nbsp&nbsp  Przeglądaj  &nbsp&nbsp&nbsp  </a>
 			 	</c:if></td>
 			
 		</tr>

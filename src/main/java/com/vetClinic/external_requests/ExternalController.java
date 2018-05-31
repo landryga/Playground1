@@ -54,6 +54,13 @@ public class ExternalController {
 		
 	}
 	
+	@RequestMapping(value="/info", method = RequestMethod.GET)
+	public String showInfoPage(ModelMap model) {
+		
+			return "/info";
+		
+	}
+	
 	@RequestMapping(value="/client-consultation", method = RequestMethod.GET)
 	public String showConsultations(ModelMap model) {
 		
@@ -147,7 +154,7 @@ public class ExternalController {
 			//check if there is already owner with given email
 			Owner owner_reference = oService.retrieveOwner(visit.getEmail());
 			
-			if(!owner_reference.equals(null)) {
+			if(owner_reference.getOwner_id()!=0) {
 				patient.setOwner_id(owner_reference.getOwner_id());
 			} else {
 				int client_id = oService.addOwnerInt(owner);

@@ -1,13 +1,13 @@
-
+﻿
 <%@ include file="/WEB-INF/views/common/header.jspf" %>
 <%@ include file="/WEB-INF/views/common/navigation.jspf" %>
 
 <div class = "container">
 	
-<header>Select action:</header></br>
+<header>Wybierz akcję</header></br>
 	
 <div>
-	<a class="btn btn-success" href = "/webservice/good-add">Add New Good</a>
+	<a class="btn btn-success" href = "/webservice/good-add">Dodaj nowy produkt</a>
 </div>
 	
 <div>
@@ -15,9 +15,9 @@
 
 	<thead>
 		<tr>
-			<th>Good</th>
-			<th>quantity</th>
-			<th>price</th>
+			<th>Produkt</th>
+			<th>Ilość</th>
+			<th>Cena</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -28,7 +28,7 @@
 			<td>${goods.quantity} pcs</td>
 			<td>${goods.price}</td>
 			<td></td>
-			<td><a href="/webservice/good-update?id=${goods.id}" class = "btn btn-success">Edit</a></td>
+			<td><a href="/webservice/good-update?id=${goods.id}" class = "btn btn-success">Edytuj</a></td>
 		</tr>
 	</c:forEach>
 		
