@@ -368,3 +368,11 @@
 0:0:0:0:0:0:0:1 - - [31/May/2018:15:15:00 +0200] "GET /webjars/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028 http-bio-8080-exec-8 5
 0:0:0:0:0:0:0:1 - - [31/May/2018:15:15:02 +0200] "GET /external HTTP/1.1" 200 2434 http-bio-8080-exec-8 9
 0:0:0:0:0:0:0:1 - - [31/May/2018:15:15:02 +0200] "GET /background4.jpg HTTP/1.1" 200 397629 http-bio-8080-exec-8 12
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:40:59 +0200] "GET /clients-shifts HTTP/1.1" 200 3094 http-bio-8080-exec-10 31
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:40:59 +0200] "GET /webjars/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028 http-bio-8080-exec-10 8
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:05 +0200] "GET /client-consultation HTTP/1.1" 200 8067 http-bio-8080-exec-10 71
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:06 +0200] "GET /webjars/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028 http-bio-8080-exec-10 8
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:15 +0200] "GET /login HTTP/1.1" 200 452 http-bio-8080-exec-10 5
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:18 +0200] "POST /login HTTP/1.1" 302 - http-bio-8080-exec-10 30
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:18 +0200] "GET / HTTP/1.1" 200 10255 http-bio-8080-exec-10 57
+0:0:0:0:0:0:0:1 - - [31/May/2018:15:41:23 +0200] "GET /webservice/list-patients HTTP/1.1" 200 4679 http-bio-8080-exec-10 14
