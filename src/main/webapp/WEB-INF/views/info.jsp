@@ -6,7 +6,7 @@
 	
 <header>Witaj na stronie!</header></br>
 	
-<blockquote >VetPrzychodnia to program przeznaczony do obsługi lecznicy weterynaryjnej. Umożliwia zarządzanie przychodnią udostępniając takie funkcje jak dodawanie i edytowanie użytkowników czy edytowanie stanów magazynowych produktów. Nie jest to jednak program skupiający się wyłącznie na zarządzaniu lecznicą "od środka", klienci lecznicy mają tutaj również możliwość zapisywania się na wizyty oraz otrzymywania wyników badań drogą mailową.  </blockquote>
+<blockquote >VetPrzychodnia to program przeznaczony do obsługi lecznicy weterynaryjnej. Umożliwia zarządzanie przychodnią udostępniając takie funkcje jak dodawanie i edytowanie użytkowników czy edytowanie stanów magazynowych produktów. Pozwala na rejestrowanie pacjentów i ich właścicieli w systemie i rejestrowanie danych na temat wizyt. Nie jest to jednak program skupiający się wyłącznie na zarządzaniu lecznicą "od środka", klienci lecznicy mają tutaj również możliwość zapisywania się na wizyty oraz otrzymywania wyników badań drogą mailową.  </blockquote>
 	
 	
 </div>

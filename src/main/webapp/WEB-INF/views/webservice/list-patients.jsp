@@ -5,7 +5,7 @@
 <div class="container">
 
 <div>
-<a class="btn btn-success" href = "/webservice/owner-add">Dodaj nowego pacjentat</a>
+<a class="btn btn-success" href = "/webservice/owner-add">Dodaj nowego pacjenta</a>
 </div>
 
 <table class="table table-striped">

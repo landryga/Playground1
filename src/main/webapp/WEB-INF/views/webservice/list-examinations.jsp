@@ -26,7 +26,7 @@ ${errormessage}
 	<tbody>
 	<c:forEach items="${examinations}" var="examinations">
 	<tr>
-			<td>${examinations.patient_name}, ${examinations.ownerName}</td>
+			<td>${examinations.patient_name}</td>
 			<td>${examinations.date}</td>
 			<td>${examinations.type_name}</td>
 			

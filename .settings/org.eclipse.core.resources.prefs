@@ -17,6 +17,7 @@ encoding//src/main/webapp/WEB-INF/views/webservice/good-update.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/goods.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/list-examinations.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/list-owners.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/webservice/list-patient-examinations.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/list-patients.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/list-shifts.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/webservice/list-users.jsp=UTF-8

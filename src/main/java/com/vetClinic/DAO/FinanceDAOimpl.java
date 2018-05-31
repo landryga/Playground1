@@ -32,7 +32,7 @@ public class FinanceDAOimpl implements FinanceDAO {
 		List<FinanceDay> financeList = new ArrayList<FinanceDay>();
 		
 		String financeSql = "select date, sum(income) as income from ( " + 
-				"select v.data as date, vg.ilosc, g.cena, vg.ilosc * g.cena as income from produkt_wizyta vg " + 
+				"select DATE_FORMAT(v.data,  '%Y-%m-%d') as date, vg.ilosc, g.cena, vg.ilosc * g.cena as income from produkt_wizyta vg " + 
 				"left join produkt g " + 
 				"on vg.produkt_id = g.id " + 
 				"left join wizyta v " + 

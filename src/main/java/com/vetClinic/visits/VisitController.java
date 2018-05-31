@@ -198,11 +198,16 @@ public class VisitController {
 			VisitGood vg = new VisitGood();
 			vg.setName(good_name);
 			vg.setQty(visit.getQty());
+			
 			vg.setVisit_id(visit_reference.getVisitId());
 			
 			GoodService gs = new GoodService();
 			
 			Good good = gs.retrieveGood(vg.getName());
+			
+			double good_price =round(visit.getQty()*good.getPrice(), 2);
+			
+			vg.setPrice(good_price);
 			
 			vg.setId(good.getId());
 			
@@ -233,6 +238,15 @@ public class VisitController {
 		
 	}
 	
+	private static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
+
 	@RequestMapping(value="/webservice/visit-update", method = RequestMethod.GET) 
 	public String showUpdateVisitPage (ModelMap model, @RequestParam int visitId, @RequestParam int doctor_id) {
 		

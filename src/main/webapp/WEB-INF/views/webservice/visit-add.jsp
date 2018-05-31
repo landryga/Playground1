@@ -4,11 +4,12 @@
 
 <div class="container">
 
-Nowa wizyta </br></br>
+<h2>Nowa wizyta</h2> </br></br>
+
 
 
 <button class = "btn btn-success" type="submit" id = "btn2">Zakończ wizytę</button>
-</br></br>
+
 <form:form method="POST" commandName = "visit" id="form1">
 	
 	
@@ -61,16 +62,18 @@ Nowa wizyta </br></br>
 	</tbody>
 </table>
 
+
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Nazwa produktu</th>
 			<th>Ilość</th>
-			<th></th>
+			<th>Cena</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
+	<c:set var="Total" value="${0}" />
 	<c:forEach items="${visitgoods}" var="visitgoods">
 	<tr>
 			<td>
@@ -79,12 +82,23 @@ Nowa wizyta </br></br>
 			<td>
 				${visitgoods.qty}
 			</td>
+			<td>
+				${visitgoods.price} zł
+			</td>
+			<c:set var="Total" value="${Total + visitgoods.price}" />
 			
 			
 			<td></td>
 			<td></td>
 		</tr>
+		
+		
 	</c:forEach>
+	<fmt:formatNumber var="Total"
+			  value="${Total }"
+			  maxFractionDigits="2" />
+	<h3><div id="cena" >Cena wizyty: ${Total} zł</div></h3>
+	
 		
 	</tbody>
 	
@@ -95,16 +109,20 @@ Nowa wizyta </br></br>
 </div>
 
 <script type = "text/javascript">
+	var final_price;
 	$(document).ready(function(){
 		$('#btn1').click(function(){
 			document.getElementById("test").value = 1;
 			document.getElementById("form1").submit();
 			document.getElementById("test").value = 0;
+			
 		});
 		$('#btn2').click(function(){
 			document.getElementById("form1").submit();
 		});
 	});
+
+	
 
 </script>
 
