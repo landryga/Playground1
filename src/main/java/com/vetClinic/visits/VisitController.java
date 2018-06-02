@@ -167,7 +167,11 @@ public class VisitController {
 			return "/webservice/visit-add";
 		}
 		
-		model.addAttribute("errormessage", "Only doctor can add a visit!");
+		
+		model.addAttribute("visits", service.retrieveVisits());
+		
+		
+		model.addAttribute("message", "Tylko lekarz moze dodawac wizyty!");
 		
 		return "/webservice/list-visits";
 		
@@ -351,8 +355,9 @@ public class VisitController {
 		
 		UserMaintainer usr = admin.retrieveUser(username);
 		
-		visit.setDoctor_id(usr.getDoctor_id());
-		
+		if(usr.getDoctor_id()!=0) {
+			visit.setDoctor_id(usr.getDoctor_id());
+		} 
 		visit.setActive(true);
 		
 		if(!service.scheduleVisit(visit)) {
@@ -360,7 +365,7 @@ public class VisitController {
 			List<UserMaintainer> users = admin.retrieveDoctors();
 			
 			model.addAttribute("users", users);
-			model.addAttribute("errormessage", "Podany termin jest już zajety lub jest poza grafikiem danego lekarza");
+			model.addAttribute("errormessage", "Podany termin jest juz zajety lub jest poza grafikiem danego lekarza");
 			return "/webservice/visit-schedule";
 		};
 		

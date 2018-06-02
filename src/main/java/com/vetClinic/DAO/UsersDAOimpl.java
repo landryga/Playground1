@@ -78,7 +78,7 @@ public class UsersDAOimpl implements UsersDAO {
 				//TODO modify accordingly
 				jdbcTemplate.execute("insert into uzytkownik_rola(uzytkownik_id, rola_id) values("+user_id+", 3);");
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} 
@@ -131,7 +131,7 @@ public class UsersDAOimpl implements UsersDAO {
 				usr.setIs_doctor(true);
 				usr.setDoctor_id(doctorId_rs.getInt(1));
 			}
-			
+			connection.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -180,7 +180,7 @@ public class UsersDAOimpl implements UsersDAO {
 				usr.setIs_admin(false);
 			}
 			
-			
+			connection.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -219,6 +219,7 @@ public class UsersDAOimpl implements UsersDAO {
 				
 				usersList.add(user);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -245,6 +246,7 @@ public class UsersDAOimpl implements UsersDAO {
 				user.setEmail(rs.getString(4));
 				usersList.add(user);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -279,7 +281,7 @@ public class UsersDAOimpl implements UsersDAO {
 			if(maintainer.isIs_doctor()) {
 				jdbcTemplate.execute("insert into uzytkownik_rola values(3,"+user_id+");");
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -324,7 +326,7 @@ public class UsersDAOimpl implements UsersDAO {
 			if(check_name_rs.next()) {
 				return false;
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -350,7 +352,7 @@ public class UsersDAOimpl implements UsersDAO {
 			removeRoleStatement.executeUpdate();
 			removePassStatement.executeUpdate();
 			removeUserStatement.executeUpdate();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

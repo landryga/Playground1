@@ -61,6 +61,8 @@ public class ConsultationDAOimpl implements ConsultationDAO {
 				consultation.setPrice(rs.getFloat(3));
 				
 			}
+			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -87,6 +89,8 @@ public class ConsultationDAOimpl implements ConsultationDAO {
 				consultation.setPrice(rs.getFloat(3));
 				
 				consultationsList.add(consultation);
+				
+				connection.close();
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -110,6 +114,7 @@ public class ConsultationDAOimpl implements ConsultationDAO {
 			statement.executeUpdate();
 			
 			statement.close();
+			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -131,6 +136,8 @@ public class ConsultationDAOimpl implements ConsultationDAO {
 			statement.executeUpdate();
 			
 			statement.close();
+			
+			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

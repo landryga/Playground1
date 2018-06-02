@@ -25,7 +25,7 @@
 	<c:forEach items="${goods}" var="goods">
 	<tr>
 			<td>${goods.name}</td>
-			<td>${goods.quantity} pcs</td>
+			<td>${goods.quantity} szt.</td>
 			<td>${goods.price}</td>
 			<td></td>
 			<td><a href="/webservice/good-update?id=${goods.id}" class = "btn btn-success">Edytuj</a></td>

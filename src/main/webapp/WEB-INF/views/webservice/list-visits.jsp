@@ -11,8 +11,7 @@ Wizyty pacjenta ${patient_name} </br></br>
 	<a class="btn btn-success" href = "/webservice/visit-schedule?patient_id=${patient_id}">Zaplanuj wizytę</a>
 	
 </div>
-
-${errormessage}
+<font color="red">${message}</font>
 
 <table class="table table-striped">
 

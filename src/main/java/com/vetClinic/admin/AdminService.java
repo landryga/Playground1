@@ -42,12 +42,7 @@ public class AdminService {
 		}
 		
 		String password = sb.toString();
-		/*
-		MailConfigurer conf = new MailConfigurer();
 		
-		JavaMailSenderImpl impl = conf.setMailSender();
-		
-		*/
 		MailHandler handler = new MailHandler();
 		
 		userMaintainer.setPassword(password);

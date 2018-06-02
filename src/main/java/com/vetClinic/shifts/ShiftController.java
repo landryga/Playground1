@@ -53,6 +53,8 @@ public class ShiftController {
 		
 		String helper = "";
 		
+		String events = null;
+		
 		helper  = result.getRawFieldValue("user_id").toString();
 		
 		if(result.hasErrors()||!service.compareDates(shift)) {
@@ -64,11 +66,20 @@ public class ShiftController {
 			    }
 			}
 			if(!service.compareDates(shift)) {
-				message = "Start date must be before end date!";
+				message = "Rozpoczecie dyzuru musi byc przed koncem dyzuru!";
 			}
+			
+			ShiftBuilder bld = new ShiftBuilder();
+			
+			List<Shift> listo = service.retrieveShifts();
+			if(listo!=null) {
+				events = bld.getString(listo);
+			}
+			
 			AdminService usr = new AdminService();
 			model.addAttribute("message", message);
 			List<UserMaintainer> users = usr.retrieveUsers();
+			model.addAttribute("data",  events);
 			model.addAttribute("users", users);
 			model.addAttribute("shift", shift);
 			return "/webservice/list-shifts";

@@ -54,6 +54,7 @@ public class OwnersDAOimpl implements OwnersDAO {
 				owner.setTelephone_number(rs.getString(5));
 				owner.setAddress(rs.getString(6));
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -83,6 +84,7 @@ public class OwnersDAOimpl implements OwnersDAO {
 				
 				ownersList.add(owner);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -120,7 +122,7 @@ public class OwnersDAOimpl implements OwnersDAO {
             }
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -157,7 +159,7 @@ public class OwnersDAOimpl implements OwnersDAO {
             }
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -190,6 +192,7 @@ public class OwnersDAOimpl implements OwnersDAO {
 				owner.setTelephone_number(rs.getString(5));
 				owner.setAddress(rs.getString(6));
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

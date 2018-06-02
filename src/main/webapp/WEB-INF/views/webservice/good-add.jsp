@@ -27,7 +27,7 @@
 	</fieldset>
 	
 	
-	<input class = "btn btn-success" type = "submit" value="Submit"/>
+	<input class = "btn btn-success" type = "submit" value="Zatwierdz"/>
 </form:form>
 
 </div>

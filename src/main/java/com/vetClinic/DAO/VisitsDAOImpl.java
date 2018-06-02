@@ -72,7 +72,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				visit.setEmail(visit_rs.getString(10));
 			}
 			//TODO: add today, past, active configuration
-					
+			connection.close();	
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -140,7 +140,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				visit.setEmail(visit_rs.getString(10));
 			}
 			//TODO: add today, past, active configuration
-					
+			connection.close();		
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -226,7 +226,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				
 				visitList.add(visit);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -306,7 +306,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				
 				visitList.add(visit);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -393,7 +393,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				
 				visitList.add(visit);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -479,7 +479,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 				
 				visitList.add(visit);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -524,7 +524,7 @@ public class VisitsDAOImpl implements VisitsDAO{
             }
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -670,7 +670,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			}
 			
 			
-			
+			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -699,7 +699,7 @@ public class VisitsDAOImpl implements VisitsDAO{
 			
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

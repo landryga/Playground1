@@ -57,6 +57,7 @@ public class GoodDAOimpl implements GoodDAO {
 				good.setPrice(rs.getFloat(4));
 				
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -84,6 +85,7 @@ public class GoodDAOimpl implements GoodDAO {
 				good.setPrice(rs.getFloat(4));
 				
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -113,6 +115,7 @@ public class GoodDAOimpl implements GoodDAO {
 				
 				goodsList.add(good);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -136,7 +139,7 @@ public class GoodDAOimpl implements GoodDAO {
 			statement.executeUpdate();
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -164,7 +167,7 @@ public class GoodDAOimpl implements GoodDAO {
 			
 			addvg_statement.close();
 			updI_statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -295,7 +298,7 @@ public class GoodDAOimpl implements GoodDAO {
 			statement.executeUpdate();
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -316,7 +319,7 @@ public class GoodDAOimpl implements GoodDAO {
 			statement.executeUpdate();
 			
 			statement.close();
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

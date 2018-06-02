@@ -67,7 +67,7 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 			}
 			
 			
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -94,6 +94,7 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			
 			statement.executeUpdate();
+			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,6 +121,7 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			
 			statement.executeUpdate(sql);
+			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,7 +160,7 @@ public class ShiftsDAOimpl implements ShiftsDAO {
 				
 			}
 			
-			
+			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

@@ -104,10 +104,10 @@ public class ExaminationDAOimpl implements ExaminationDAO {
             }
 			
 			examination_statement.close();
-			connection.close();
+			
 			
 			//TODO: add today, past, active configuration
-					
+			connection.close();		
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -151,9 +151,11 @@ public class ExaminationDAOimpl implements ExaminationDAO {
 				examination.setOwnerId(examination_rs.getInt(10));
 				
 				examinationList.add(examination);
+				
+				
 			}
 			//TODO: add today, past, active configuration
-					
+			connection.close();	
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -200,9 +202,11 @@ public class ExaminationDAOimpl implements ExaminationDAO {
 				examination.setOwnerId(examination_rs.getInt(10));
 				
 				examinationList.add(examination);
+				
+				
 			}
 			//TODO: add today, past, active configuration
-					
+			connection.close();		
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -244,8 +248,12 @@ public class ExaminationDAOimpl implements ExaminationDAO {
 				examination.setType_name(examination_rs.getString(8));
 				examination.setOwnerName(examination_rs.getString(9));
 				examination.setOwnerId(examination_rs.getInt(10));
+				
+				
 			}
 			//TODO: add today, past, active configuration
+			
+			connection.close();
 					
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -276,6 +284,8 @@ public class ExaminationDAOimpl implements ExaminationDAO {
 				
 				examinationTypeList.add(examinationt);
 			}
+			
+			connection.close();
 			//TODO: add today, past, active configuration
 					
 		} catch (SQLException ex) {

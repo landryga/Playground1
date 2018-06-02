@@ -23,7 +23,7 @@ Zaplanuj wizytę </br></br>
 	
 	
 	<fieldset class="form-group col-xs-4">
-		<form:label path="doctor_id">Pracownik: </form:label>
+		<form:label path="doctor_id">Lekarz: </form:label>
 			<form:select path="doctor_id" type = "text" class="form-control" required = "required">
 				<c:forEach items="${users}" var="users">
 					<option value="${users.id}">${users.username}  ${users.userSurName}</option>
@@ -34,7 +34,7 @@ Zaplanuj wizytę </br></br>
 	
 	</fieldset>
 </div>	
-	<input class = "btn btn-success" type = "submit" value="Add to list"/>
+	<input class = "btn btn-success" type = "submit" value="Zatwierdz"/>
 
 
 

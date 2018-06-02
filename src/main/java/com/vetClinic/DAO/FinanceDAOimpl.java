@@ -51,6 +51,7 @@ public class FinanceDAOimpl implements FinanceDAO {
 				day.setIncome(rs.getFloat(2));
 				financeList.add(day);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

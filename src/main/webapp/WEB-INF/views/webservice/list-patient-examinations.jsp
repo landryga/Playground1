@@ -11,7 +11,8 @@ Lista badań </br></br>
 	
 </div>
 
-${errormessage}
+<font color="red">${errormessage}</font>
+
 
 <table class="table table-striped">
 

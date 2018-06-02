@@ -81,6 +81,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 				}
 				patientsList.add(patient);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -113,6 +114,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 			Connection connection = dS.getConnection();
 			PreparedStatement statement = connection.prepareStatement(addPatientSql);
 			statement.executeUpdate();
+			connection.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -168,6 +170,7 @@ public class PatientsDAOimpl implements PatientsDAO {
 	            }
 			
 			statement.close();
+			connection.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
