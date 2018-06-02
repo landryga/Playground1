@@ -59,7 +59,7 @@ public class AdminController {
 			}
 			model.addAttribute("message", message);
 			model.addAttribute("user", maintainer);
-			return "user-add";
+			return "/webservice/add-user";
 		}
 		service.addUser(maintainer);
 		model.clear();
